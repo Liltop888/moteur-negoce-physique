@@ -103,7 +103,8 @@ def eu_book():
 def eu_preview():
     out = {}
     for name, df in eu_book().items():
-        out[name] = df.iloc[:8, :12].astype(str).values.tolist()
+        codes = df.iloc[:, 1].astype(str).str.strip().value_counts().head(40).to_dict() if df.shape[1] > 1 else {}
+        out[name] = dict(lignes=int(df.shape[0]), codes_pays=codes, debut=df.iloc[:8, :12].astype(str).values.tolist())
     return out
 
 
@@ -133,9 +134,10 @@ def eu(country_code, product):
 SERIES = [
     dict(id="wti", nom="WTI (brut américain)", unite="$/baril", freq="j", f=wti),
     dict(id="brent", nom="Brent (brut de la mer du Nord)", unite="$/baril", freq="j", f=brent),
-    dict(id="opep", nom="Panier OPEP", unite="$/baril", freq="j", f=opep),
     dict(id="essence_ny", nom="Essence, port de New York", unite="$/gallon", freq="j", f=essence_ny),
     dict(id="diesel_ny", nom="Diesel, port de New York", unite="$/gallon", freq="j", f=diesel_ny),
+    dict(id="sp95_ue", nom="Essence (Euro-super 95) à la pompe, moyenne UE", unite="€/litre", freq="s", f=lambda: eu("EU", "essence")),
+    dict(id="gazole_ue", nom="Gazole à la pompe, moyenne UE", unite="€/litre", freq="s", f=lambda: eu("EU", "diesel")),
     dict(id="sp95_fr", nom="SP95 à la pompe, France", unite="€/litre", freq="s", f=lambda: eu("FR", "essence")),
     dict(id="gazole_fr", nom="Gazole à la pompe, France", unite="€/litre", freq="s", f=lambda: eu("FR", "diesel")),
     dict(id="sp95_de", nom="Super 95 à la pompe, Allemagne", unite="€/litre", freq="s", f=lambda: eu("DE", "essence")),

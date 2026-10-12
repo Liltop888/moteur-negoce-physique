@@ -51,6 +51,10 @@ def score_journal(journal, series):
 
 
 status, out, series = {}, {}, {}
+try:
+    status["apercu_ue"] = sources.eu_preview()
+except Exception as e:
+    status["apercu_ue"] = f"{type(e).__name__}: {e}"
 for spec in sources.SERIES:
     sid = spec["id"]
     try:
@@ -81,7 +85,7 @@ for spec in sources.SERIES:
         status[sid] = dict(ok=True, source=src, points=len(s), debut=str(s.index[0].date()), fin=str(s.index[-1].date()))
     except Exception as e:  # une source qui tombe ne bloque pas les autres
         status[sid] = dict(ok=False, erreur=f"{type(e).__name__}: {e}"[:500], trace=traceback.format_exc()[-800:])
-        if sid.endswith(("_fr", "_de")) and "apercu_ue" not in status:
+        if sid.endswith(("_fr", "_de", "_ue")) and "apercu_ue" not in status:
             try:
                 status["apercu_ue"] = sources.eu_preview()
             except Exception as e2:
