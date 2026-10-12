@@ -1,6 +1,6 @@
 # Comptoir : le pétrole, du puits à la pompe, en chiffres
 
-Sidy Ali Haidara · M1 Économétrie et Statistique, Université Paris 1 Panthéon-Sorbonne · octobre 2026
+Sidy Ali Haidara · étudiant en économétrie, Université Paris 1 Panthéon-Sorbonne · octobre 2026
 
 🌐 Site : https://liltop888.github.io/moteur-negoce-physique/
 📄 Rapport (9 pages) : [`rapport/rapport_moteur_negoce.pdf`](rapport/rapport_moteur_negoce.pdf)
