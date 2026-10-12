@@ -1,5 +1,5 @@
 {
- "mise_a_jour": "2026-10-12T20:58+00:00",
+ "mise_a_jour": "2026-10-12T21:01+00:00",
  "sources": {
   "apercu_ue": {
    "Prices with taxes": {
@@ -966,26 +966,6 @@
    "points": 1087,
    "debut": "2005-01-03",
    "fin": "2026-10-05"
-  },
-  "sp95_fr": {
-   "ok": false,
-   "erreur": "ValueError: aucune ligne pour le pays FR",
-   "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/update.py\", line 61, in <module>\n    s, src = spec[\"f\"]()\n             ^^^^^^^^^^^\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/sources.py\", line 141, in <lambda>\n    dict(id=\"sp95_fr\", nom=\"SP95 à la pompe, France\", unite=\"€/litre\", freq=\"s\", f=lambda: eu(\"FR\", \"essence\")),\n                                                                                           ^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/sources.py\", line 126, in eu\n    raise ValueError(f\"aucune ligne pour le pays {country_code}\")\nValueError: aucune ligne pour le pays FR\n"
-  },
-  "gazole_fr": {
-   "ok": false,
-   "erreur": "ValueError: aucune ligne pour le pays FR",
-   "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/update.py\", line 61, in <module>\n    s, src = spec[\"f\"]()\n             ^^^^^^^^^^^\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/sources.py\", line 142, in <lambda>\n    dict(id=\"gazole_fr\", nom=\"Gazole à la pompe, France\", unite=\"€/litre\", freq=\"s\", f=lambda: eu(\"FR\", \"diesel\")),\n                                                                                               ^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/sources.py\", line 126, in eu\n    raise ValueError(f\"aucune ligne pour le pays {country_code}\")\nValueError: aucune ligne pour le pays FR\n"
-  },
-  "sp95_de": {
-   "ok": false,
-   "erreur": "ValueError: aucune ligne pour le pays DE",
-   "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/update.py\", line 61, in <module>\n    s, src = spec[\"f\"]()\n             ^^^^^^^^^^^\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/sources.py\", line 143, in <lambda>\n    dict(id=\"sp95_de\", nom=\"Super 95 à la pompe, Allemagne\", unite=\"€/litre\", freq=\"s\", f=lambda: eu(\"DE\", \"essence\")),\n                                                                                                  ^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/sources.py\", line 126, in eu\n    raise ValueError(f\"aucune ligne pour le pays {country_code}\")\nValueError: aucune ligne pour le pays DE\n"
-  },
-  "gazole_de": {
-   "ok": false,
-   "erreur": "ValueError: aucune ligne pour le pays DE",
-   "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/update.py\", line 61, in <module>\n    s, src = spec[\"f\"]()\n             ^^^^^^^^^^^\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/sources.py\", line 144, in <lambda>\n    dict(id=\"gazole_de\", nom=\"Diesel à la pompe, Allemagne\", unite=\"€/litre\", freq=\"s\", f=lambda: eu(\"DE\", \"diesel\")),\n                                                                                                  ^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/sources.py\", line 126, in eu\n    raise ValueError(f\"aucune ligne pour le pays {country_code}\")\nValueError: aucune ligne pour le pays DE\n"
   }
  }
 }
