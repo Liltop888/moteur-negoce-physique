@@ -1,5 +1,5 @@
 {
- "mise_a_jour": "2026-10-12T20:44+00:00",
+ "mise_a_jour": "2026-10-12T20:56+00:00",
  "sources": {
   "wti": {
    "ok": true,
@@ -18,7 +18,7 @@
   "opep": {
    "ok": false,
    "erreur": "HTTPError: 403 Client Error: Forbidden for url: https://www.opec.org/basket/basketDayArchives.xml",
-   "trace": "  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/update.py\", line 57, in <module>\n    s, src = spec[\"f\"]()\n             ^^^^^^^^^^^\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/sources.py\", line 81, in opep\n    xml = get(OPEC_XML).decode(\"utf-8\", \"ignore\")\n          ^^^^^^^^^^^^^\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/sources.py\", line 19, in get\n    r.raise_for_status()\n  File \"/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/requests/models.py\", line 1167, in raise_for_status\n    raise HTTPError(http_error_msg, response=self)\nrequests.exceptions.HTTPError: 403 Client Error: Forbidden for url: https://www.opec.org/basket/basketDayArchives.xml\n"
+   "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/update.py\", line 57, in <module>\n    s, src = spec[\"f\"]()\n             ^^^^^^^^^^^\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/sources.py\", line 84, in opep\n    r.raise_for_status()\n  File \"/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/requests/models.py\", line 1167, in raise_for_status\n    raise HTTPError(http_error_msg, response=self)\nrequests.exceptions.HTTPError: 403 Client Error: Forbidden for url: https://www.opec.org/basket/basketDayArchives.xml\n"
   },
   "essence_ny": {
    "ok": true,
@@ -36,8 +36,8 @@
   },
   "sp95_fr": {
    "ok": false,
-   "erreur": "ValueError: colonne FR/essence introuvable",
-   "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/update.py\", line 57, in <module>\n    s, src = spec[\"f\"]()\n             ^^^^^^^^^^^\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/sources.py\", line 141, in <lambda>\n    dict(id=\"sp95_fr\", nom=\"SP95 à la pompe, France\", unite=\"€/litre\", freq=\"s\", f=lambda: eu(\"FR\", \"essence\")),\n                                                                                           ^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/sources.py\", line 126, in eu\n    raise ValueError(f\"colonne {country_code}/{product} introuvable\")\nValueError: colonne FR/essence introuvable\n"
+   "erreur": "ValueError: aucune ligne pour le pays FR",
+   "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/update.py\", line 57, in <module>\n    s, src = spec[\"f\"]()\n             ^^^^^^^^^^^\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/sources.py\", line 139, in <lambda>\n    dict(id=\"sp95_fr\", nom=\"SP95 à la pompe, France\", unite=\"€/litre\", freq=\"s\", f=lambda: eu(\"FR\", \"essence\")),\n                                                                                           ^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/sources.py\", line 125, in eu\n    raise ValueError(f\"aucune ligne pour le pays {country_code}\")\nValueError: aucune ligne pour le pays FR\n"
   },
   "apercu_ue": {
    "Prices with taxes": [
@@ -745,18 +745,18 @@
   },
   "gazole_fr": {
    "ok": false,
-   "erreur": "ValueError: colonne FR/diesel introuvable",
-   "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/update.py\", line 57, in <module>\n    s, src = spec[\"f\"]()\n             ^^^^^^^^^^^\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/sources.py\", line 142, in <lambda>\n    dict(id=\"gazole_fr\", nom=\"Gazole à la pompe, France\", unite=\"€/litre\", freq=\"s\", f=lambda: eu(\"FR\", \"diesel\")),\n                                                                                               ^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/sources.py\", line 126, in eu\n    raise ValueError(f\"colonne {country_code}/{product} introuvable\")\nValueError: colonne FR/diesel introuvable\n"
+   "erreur": "ValueError: aucune ligne pour le pays FR",
+   "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/update.py\", line 57, in <module>\n    s, src = spec[\"f\"]()\n             ^^^^^^^^^^^\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/sources.py\", line 140, in <lambda>\n    dict(id=\"gazole_fr\", nom=\"Gazole à la pompe, France\", unite=\"€/litre\", freq=\"s\", f=lambda: eu(\"FR\", \"diesel\")),\n                                                                                               ^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/sources.py\", line 125, in eu\n    raise ValueError(f\"aucune ligne pour le pays {country_code}\")\nValueError: aucune ligne pour le pays FR\n"
   },
   "sp95_de": {
    "ok": false,
-   "erreur": "ValueError: colonne DE/essence introuvable",
-   "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/update.py\", line 57, in <module>\n    s, src = spec[\"f\"]()\n             ^^^^^^^^^^^\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/sources.py\", line 143, in <lambda>\n    dict(id=\"sp95_de\", nom=\"Super 95 à la pompe, Allemagne\", unite=\"€/litre\", freq=\"s\", f=lambda: eu(\"DE\", \"essence\")),\n                                                                                                  ^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/sources.py\", line 126, in eu\n    raise ValueError(f\"colonne {country_code}/{product} introuvable\")\nValueError: colonne DE/essence introuvable\n"
+   "erreur": "ValueError: aucune ligne pour le pays DE",
+   "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/update.py\", line 57, in <module>\n    s, src = spec[\"f\"]()\n             ^^^^^^^^^^^\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/sources.py\", line 141, in <lambda>\n    dict(id=\"sp95_de\", nom=\"Super 95 à la pompe, Allemagne\", unite=\"€/litre\", freq=\"s\", f=lambda: eu(\"DE\", \"essence\")),\n                                                                                                  ^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/sources.py\", line 125, in eu\n    raise ValueError(f\"aucune ligne pour le pays {country_code}\")\nValueError: aucune ligne pour le pays DE\n"
   },
   "gazole_de": {
    "ok": false,
-   "erreur": "ValueError: colonne DE/diesel introuvable",
-   "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/update.py\", line 57, in <module>\n    s, src = spec[\"f\"]()\n             ^^^^^^^^^^^\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/sources.py\", line 144, in <lambda>\n    dict(id=\"gazole_de\", nom=\"Diesel à la pompe, Allemagne\", unite=\"€/litre\", freq=\"s\", f=lambda: eu(\"DE\", \"diesel\")),\n                                                                                                  ^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/sources.py\", line 126, in eu\n    raise ValueError(f\"colonne {country_code}/{product} introuvable\")\nValueError: colonne DE/diesel introuvable\n"
+   "erreur": "ValueError: aucune ligne pour le pays DE",
+   "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/update.py\", line 57, in <module>\n    s, src = spec[\"f\"]()\n             ^^^^^^^^^^^\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/sources.py\", line 142, in <lambda>\n    dict(id=\"gazole_de\", nom=\"Diesel à la pompe, Allemagne\", unite=\"€/litre\", freq=\"s\", f=lambda: eu(\"DE\", \"diesel\")),\n                                                                                                  ^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/moteur-negoce-physique/moteur-negoce-physique/src/previsions/sources.py\", line 125, in eu\n    raise ValueError(f\"aucune ligne pour le pays {country_code}\")\nValueError: aucune ligne pour le pays DE\n"
   }
  }
 }
