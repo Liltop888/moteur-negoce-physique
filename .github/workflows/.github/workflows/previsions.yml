@@ -1,0 +1,41 @@
+name: Prévisions hebdomadaires
+
+on:
+  schedule:
+    - cron: "17 6 * * 1"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "src/previsions/**"
+      - ".github/workflows/previsions.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: previsions
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Dépendances
+        run: pip install pandas numpy scipy requests openpyxl xlrd
+      - name: Télécharger les données et recalculer les prévisions
+        run: python src/previsions/update.py
+      - name: Publier
+        run: |
+          git config user.name "comptoir-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/data
+          git diff --cached --quiet && echo "rien de nouveau" && exit 0
+          git commit -m "Prévisions du $(date -u +%Y-%m-%d)"
+          git pull --rebase
+          git push
