@@ -87,12 +87,37 @@
     document.querySelectorAll(".pv-link").forEach((a) => a.addEventListener("click", () => show(a.dataset.id)));
   }
 
+
+  // ---------------------------------------------------------------- Et toi ? (WTI, 1 semaine)
+  function toi(d) {
+    const s = d.series.find((x) => x.id === "wti") || d.series[0];
+    const p = s.historique.prix, h = 5, last = s.dernier;
+    const moves = [];
+    for (let i = 0; i + h < p.length; i++) moves.push(Math.abs(p[i + h] / p[i] - 1));
+    $("toi-prix").textContent = fr(last, 2) + " $";
+    const m = s.horizons["1 semaine"];
+    $("mod-band").textContent = fr(m.bas, 0) + " à " + fr(m.haut, 0) + " $";
+    $("mod-score").textContent = pct(s.backtest["1 semaine"].couverture) + " des semaines";
+    const upd = () => {
+      const w = +$("toi-w").value / 100;
+      $("toi-out").textContent = "± " + (w * 100).toFixed(0) + " %";
+      $("toi-band").textContent = fr(last * (1 - w), 0) + " à " + fr(last * (1 + w), 0) + " $";
+      const hit = moves.filter((x) => x <= w).length / moves.length;
+      $("toi-score").textContent = pct(hit) + " des semaines";
+      $("toi-msg").innerHTML = hit < 0.8
+        ? `<b>Trop étroit.</b> Sur la dernière année, ta fourchette n'aurait contenu le prix que ${pct(hit)} des semaines. L'intuition sous-estime presque toujours la volatilité du pétrole.`
+        : hit > 0.97 ? "<b>Trop large.</b> Ta fourchette ne se trompe presque jamais, mais elle est si large qu'elle n'apprend rien. Une bonne fourchette à 90 % se trompe environ une fois sur dix."
+        : "<b>Bien réglé !</b> Ta fourchette contient le prix environ 9 semaines sur 10 : c'est exactement ce que vise le modèle.";
+    };
+    $("toi-w").addEventListener("input", upd); upd();
+  }
+
   fetch("data/previsions.json", { cache: "no-store" }).then((r) => r.json()).then((d) => {
     DATA = d;
     $("pv-maj").textContent = "Mis à jour le " + new Date(d.mise_a_jour).toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
     $("pv-tabs").innerHTML = d.series.map((s) => `<button type="button" class="pv-tab" data-id="${s.id}" aria-pressed="false">${s.nom.split(" (")[0]}</button>`).join("");
     document.querySelectorAll(".pv-tab").forEach((b) => b.addEventListener("click", () => show(b.dataset.id)));
-    table(); show(d.series[0].id);
+    table(); show(d.series[0].id); if ($("toi-w")) toi(d);
     window.addEventListener("resize", () => current && draw(current));
   }).catch(() => { $("pv-maj").textContent = "Les données n'ont pas pu être chargées."; });
 })();

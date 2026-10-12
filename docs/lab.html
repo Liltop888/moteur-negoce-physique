@@ -30,7 +30,18 @@
     <p class="lede">Au Texas, des milliers de petites entreprises produisent du pétrole. Chaque mois, elles déclarent publiquement leur production. Quand le prix chute, beaucoup s'arrêtent. Peut-on voir venir celles qui vont s'arrêter&nbsp;?</p>
     <p><b>Oui, en regardant leur production de près.</b> Un producteur qui va s'arrêter ne décline pas doucement&nbsp;: sa production devient <b>irrégulière</b>, avec des mois à zéro, puis chute d'un coup. C'est ce signal que le modèle apprend à reconnaître.</p>
   </div>
-  <figure style="max-width:520px"><img src="assets/quintiles.png" alt="Taux de sortie de 5,5 % à 32,8 % selon le niveau de risque prédit" width="726" height="682"><figcaption>Les producteurs classés «&nbsp;les plus à risque&nbsp;» se sont arrêtés <b>six fois plus souvent</b> que les «&nbsp;moins à risque&nbsp;» (32,8&nbsp;% contre 5,5&nbsp;%).</figcaption></figure>
+  <div class="read">
+    <h2>À toi de deviner</h2>
+    <p>Fin 2019, le modèle a classé 638 producteurs en cinq groupes, du moins risqué (1) au plus risqué (5). Deux ans plus tard, dans quel groupe les producteurs se sont-ils le plus arrêtés&nbsp;? Clique sur ta réponse.</p>
+    <div class="quiz" id="quiz">
+      <button type="button" data-g="0"><span class="col"><i></i></span><em>?</em><span>Groupe 1<br><small>le plus sûr</small></span></button>
+      <button type="button" data-g="1"><span class="col"><i></i></span><em>?</em><span>Groupe 2</span></button>
+      <button type="button" data-g="2"><span class="col"><i></i></span><em>?</em><span>Groupe 3</span></button>
+      <button type="button" data-g="3"><span class="col"><i></i></span><em>?</em><span>Groupe 4</span></button>
+      <button type="button" data-g="4"><span class="col"><i></i></span><em>?</em><span>Groupe 5<br><small>le plus risqué</small></span></button>
+    </div>
+    <p class="quiz-msg" id="quiz-msg" aria-live="polite"></p>
+  </div>
   <div class="read">
     <h2>Pourquoi on peut y croire</h2>
     <ul>
@@ -97,5 +108,6 @@
 <span><a href="https://github.com/SidyHaidara/moteur-negoce-physique">Code source sur GitHub</a></span>
 </div></footer>
 
+<script src="assets/simple.js"></script>
 </body>
 </html>

@@ -29,16 +29,46 @@
     <h1>Combien gagne-t-on vraiment sur un baril&nbsp;?</h1>
     <p class="lede">Un petit producteur de pétrole a besoin d'argent tout de suite. Il accepte de vendre son pétrole <b>7,40&nbsp;$ moins cher</b> que le marché à qui le paie d'avance. Ça a l'air d'une bonne affaire. Mais combien en reste-t-il, une fois les risques payés&nbsp;?</p>
 
-    <div class="ticket" aria-label="Ce qu'il reste par baril">
-      <div class="t-row"><span>Ce que tu gagnes au départ</span><b class="pos">+7,40&nbsp;$</b></div>
-      <div class="t-row"><span>Il peut faire faillite avant de te livrer</span><b class="neg">−2,91&nbsp;$</b></div>
-      <div class="t-row"><span>Tu le paies d'avance&nbsp;: ton argent est bloqué</span><b class="neg">−1,71&nbsp;$</b></div>
-      <div class="t-row"><span>Il veut un prix minimum garanti</span><b class="neg">−1,43&nbsp;$</b></div>
-      <div class="t-row t-total"><span>Il te reste</span><b>1,36&nbsp;$ par baril</b></div>
+    <h2 style="margin-top:30px">Négocie ton baril</h2>
+    <p>Tu es le négociant. Deux choix&nbsp;: <b>combien de temps</b> dure l'accord, et <b>quel prix minimum</b> tu garantis au producteur. Bouge les curseurs et regarde ce qui te reste.</p>
+    
+  </div>
+  <div class="ng">
+    <form class="fields" onsubmit="return false"><p style="margin:0;font:.9rem var(--ui)" class="muted">Remise obtenue : 7,40 $ par baril · risque de faillite : 15 % par an</p>
+      <input type="hidden" id="ng-remise" value="7.4">
+      <div class="field"><label for="ng-duree">Durée de l'accord <output id="ngo-duree"></output></label><input type="range" id="ng-duree" min="1" max="12" step="1" value="12"><small>Plus c'est long, plus tu avances d'argent et plus le producteur a le temps de faire faillite.</small></div>
+      <div class="field"><label for="ng-plancher">Prix minimum garanti <output id="ngo-plancher"></output></label><input type="range" id="ng-plancher" min="0" max="95" step="5" value="70"><small>Si le prix moyen tombe en dessous, tu payes la différence. 0 = aucune garantie. Prix actuel : 96 $.</small></div>
+      <input type="hidden" id="ng-pd" value="15">
+      <input type="checkbox" id="ng-lie" checked hidden>
+    </form>
+    <div>
+      <div class="ticket" id="ng-ticket" aria-live="polite">
+        <div class="t-row"><span>Ce que tu gagnes au départ</span><b class="pos" id="ngv-remise">—</b></div>
+        <div class="t-row"><span>Il peut faire faillite avant de te livrer</span><b class="neg" id="ngv-cva">—</b></div>
+        <div class="t-row"><span>Ton argent est bloqué pendant l'accord</span><b class="neg" id="ngv-fin">—</b></div>
+        <div class="t-row" id="ng-row-floor"><span>La garantie de prix minimum</span><b class="neg" id="ngv-floor">—</b></div>
+        <div class="t-row t-total" id="ng-total"><span>Il te reste, par baril</span><b id="ngv-net">—</b></div>
+      </div>
+      <div class="ng-bar" aria-hidden="true"><i id="ngb-cva" class="b-cva"></i><i id="ngb-fin" class="b-fin"></i><i id="ngb-floor" class="b-floor"></i><i id="ngb-net" class="b-net"></i></div>
+      <p class="ng-verdict" id="ng-verdict"></p>
     </div>
-    <p><b>La leçon&nbsp;:</b> sur 7,40&nbsp;$ de remise, il ne reste presque rien. En revanche, si l'accord dure <b>3 mois au lieu de 12</b>, les risques fondent et il te reste <b>5,89&nbsp;$</b>. Mieux vaut des accords courts, renouvelés souvent.</p>
+  </div>
+
+  <div class="read">
+    <h2>Joue l'année</h2>
+    <p>Les chiffres du ticket sont des moyennes. Dans la vraie vie, il n'y a qu'une seule année. Lance-la et regarde ce qui arrive avec tes réglages.</p>
+    <button type="button" class="btn primary" id="ng-play">▶ Jouer une année</button>
+  </div>
+  <div class="ng-year">
+    <canvas id="ng-canvas" width="1100" height="440" role="img" aria-label="Prix du pétrole mois par mois et livraisons du producteur"></canvas>
+    <div><ol class="ng-log" id="ng-log"></ol><p class="ng-result" id="ng-result">Appuie sur « Jouer une année ».</p></div>
+  </div>
+
+  <div class="read">
+    <p style="margin-top:28px"><b>La leçon&nbsp;:</b> avec l'accord de base, il ne reste qu'environ 1,36&nbsp;$ sur 7,40&nbsp;$ de remise. Sur 3 mois au lieu de 12, il en reste environ 5,89&nbsp;$. Mieux vaut des accords courts, renouvelés souvent.</p>
 
     <h2>Ligne par ligne, en clair</h2>
+    <p class="muted">Chiffres de l'accord de base&nbsp;: remise de 7,40&nbsp;$, 12 mois, garantie à 70&nbsp;$, 15&nbsp;% de risque de faillite.</p>
 
     <h3>1. Il peut faire faillite avant de te livrer (−2,91&nbsp;$)</h3>
     <p>Tu as payé 12 mois de pétrole d'avance. Si le producteur fait faillite au 5<sup>e</sup> mois, tu perds le reste. Et le pire, c'est le moment&nbsp;: les petits producteurs font faillite <b>quand le prix du pétrole s'effondre</b>, donc tous en même temps, au pire moment pour toi. Le calcul de ce risque s'appelle la CVA&nbsp;: c'est le prix d'une assurance contre sa faillite.</p>
@@ -158,5 +188,6 @@
 <span><a href="https://github.com/SidyHaidara/moteur-negoce-physique">Code source sur GitHub</a></span>
 </div></footer>
 
+<script src="assets/risque.js"></script>
 </body>
 </html>

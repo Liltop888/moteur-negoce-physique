@@ -29,6 +29,19 @@
     <p class="muted" id="pv-maj" style="font-family:var(--ui);font-size:.9rem">Chargement…</p>
   </div>
 
+
+  <section class="read" id="toi" style="padding-top:18px">
+    <h2>Et toi, tu dirais combien&nbsp;?</h2>
+    <p>Aujourd'hui, le WTI vaut <b id="toi-prix">…</b>. Dans une semaine, de combien peut-il bouger&nbsp;? Règle ta fourchette avec le curseur.</p>
+    <div class="fields" style="margin:14px 0">
+      <div class="field"><label for="toi-w">Ta fourchette <output id="toi-out"></output></label><input type="range" id="toi-w" min="1" max="30" step="1" value="5"></div>
+    </div>
+    <div class="compare">
+      <div class="card"><b style="font-family:var(--ui)">Ta prévision</b><dl><dt>Dans 1 semaine</dt><dd id="toi-band">—</dd><dt>Aurait été juste</dt><dd id="toi-score">—</dd></dl></div>
+      <div class="card"><b style="font-family:var(--ui)">Le modèle</b><dl><dt>Dans 1 semaine</dt><dd id="mod-band">—</dd><dt>A été juste</dt><dd id="mod-score">—</dd></dl></div>
+    </div>
+    <p class="quiz-msg" id="toi-msg"></p>
+  </section>
   <section style="padding-top:20px">
     <div class="table-wrap"><table id="pv-table"></table></div>
   </section>
