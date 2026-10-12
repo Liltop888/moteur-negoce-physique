@@ -67,3 +67,20 @@ sont des hypothèses ; la vitesse de retour à la moyenne du prix est mal identi
 Les résultats nominatifs par opérateur ne sont pas publiés : ce sont des prédictions statistiques, pas des constats.
 
 Licence MIT.
+
+## Partie 2 : les outils du M2 Probabilités et Finance
+
+Quatre modules qui valorisent l'accord de préfinancement sur les prix journaliers du WTI (2010-2026) :
+
+| Module | Méthode | Résultat clé |
+|---|---|---|
+| `sauts_extremes.py` | Merton à sauts, valeurs extrêmes (GPD), GARCH + EVT, tests de Kupiec et Christoffersen | Seul GARCH + EVT passe le backtest 2020-2026 (19 dépassements pour 16,9 attendus) |
+| `plancher.py` | Put sous Schwartz (formule fermée), option sur moyenne par Monte Carlo + variable de contrôle | Plancher à 80 $ : 6,32 $/b ; variance divisée par 98 |
+| `stockage.py` | Arrêt optimal : Longstaff-Schwartz contre programmation dynamique | À 50 $, attendre vaut 7,44 $ ; à 96 $, vendre tout de suite |
+| `cva.py` | CVA avec intensité de défaut liée au prix (wrong-way risk) | 2,72 → 2,91 $/b |
+
+```bash
+cd src/m2
+python run_all.py     # résultats et figures dans resultats/m2/
+```
+Page du site : https://liltop888.github.io/moteur-negoce-physique/modeles.html
