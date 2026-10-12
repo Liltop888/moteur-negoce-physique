@@ -138,8 +138,4 @@ SERIES = [
     dict(id="diesel_ny", nom="Diesel, port de New York", unite="$/gallon", freq="j", f=diesel_ny),
     dict(id="sp95_ue", nom="Essence (Euro-super 95) à la pompe, moyenne UE", unite="€/litre", freq="s", f=lambda: eu("EU", "essence")),
     dict(id="gazole_ue", nom="Gazole à la pompe, moyenne UE", unite="€/litre", freq="s", f=lambda: eu("EU", "diesel")),
-    dict(id="sp95_fr", nom="SP95 à la pompe, France", unite="€/litre", freq="s", f=lambda: eu("FR", "essence")),
-    dict(id="gazole_fr", nom="Gazole à la pompe, France", unite="€/litre", freq="s", f=lambda: eu("FR", "diesel")),
-    dict(id="sp95_de", nom="Super 95 à la pompe, Allemagne", unite="€/litre", freq="s", f=lambda: eu("DE", "essence")),
-    dict(id="gazole_de", nom="Diesel à la pompe, Allemagne", unite="€/litre", freq="s", f=lambda: eu("DE", "diesel")),
 ]
