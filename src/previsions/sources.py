@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import requests
 
-UA = {"User-Agent": "Mozilla/5.0 (compatible; comptoir-previsions/1.0; +https://github.com/Liltop888/moteur-negoce-physique)"}
+UA = {"User-Agent": "Mozilla/5.0 (compatible; comptoir-previsions/1.0; +https://github.com/SidyHaidara/moteur-negoce-physique)"}
 EIA_XLS = "https://www.eia.gov/dnav/pet/xls/PET_PRI_SPT_S1_D.xls"
 EU_XLSX = ("https://energy.ec.europa.eu/document/download/906e60ca-8b6a-44e7-8589-652854d2fd3f_en"
            "?filename=Weekly_Oil_Bulletin_Prices_History_maticni_4web.xlsx")

@@ -2,7 +2,7 @@
 
 Sidy Ali Haidara · étudiant en économétrie, Université Paris 1 Panthéon-Sorbonne · octobre 2026
 
-🌐 Site : https://liltop888.github.io/moteur-negoce-physique/
+🌐 Site : https://sidyhaidara.github.io/moteur-negoce-physique/
 📄 Rapport (9 pages) : [`rapport/rapport_moteur_negoce.pdf`](rapport/rapport_moteur_negoce.pdf)
 
 ## Pourquoi ce projet
@@ -89,7 +89,7 @@ Quatre modules qui valorisent l'accord de préfinancement sur les prix journalie
 cd src/m2
 python run_all.py     # résultats et figures dans resultats/m2/
 ```
-Page du site : https://liltop888.github.io/moteur-negoce-physique/modeles.html
+Page du site : https://sidyhaidara.github.io/moteur-negoce-physique/modeles.html
 
 ## 3. Prévisions hebdomadaires
 
@@ -101,7 +101,7 @@ WTI, Brent, essence et diesel au port de New York (EIA), essence et gazole à la
 - Backtest sur 3 ans (156 dates) : la fourchette à une semaine contient le vrai prix 87 à 90 % du temps selon la série.
 - Chaque prévision est ajoutée à [`docs/data/journal.csv`](docs/data/journal.csv) le jour même et n'est jamais modifiée.
 
-Code : `src/previsions/` · Page : https://liltop888.github.io/moteur-negoce-physique/previsions.html
+Code : `src/previsions/` · Page : https://sidyhaidara.github.io/moteur-negoce-physique/previsions.html
 
 ## Journal de bord
 
