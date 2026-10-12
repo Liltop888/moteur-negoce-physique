@@ -78,7 +78,11 @@ def diesel_ny():
 
 # ---------------------------------------------------------------- OPEP : panier de référence
 def opep():
-    xml = get(OPEC_XML).decode("utf-8", "ignore")
+    r = requests.get(OPEC_XML, timeout=90, headers={
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36",
+        "Accept": "application/xml,text/xml;q=0.9,*/*;q=0.8", "Referer": "https://www.opec.org/"})
+    r.raise_for_status()
+    xml = r.content.decode("utf-8", "ignore")
     pairs = re.findall(r'data="(\d{4}-\d{2}-\d{2})"\s+val="([\d.]+)"', xml)
     if not pairs:
         raise ValueError("format XML inattendu : " + xml[:300])
@@ -104,29 +108,23 @@ def eu_preview():
 
 
 def eu(country_code, product):
-    """Prix à la pompe taxes comprises, en €/1000 L -> €/L. Cherche l'onglet « with taxes » puis la colonne
-    dont l'en-tête contient le code pays et le produit (Euro-super 95 ou gasoil/diesel)."""
+    """Prix à la pompe taxes comprises (onglet « Prices with taxes ») : une ligne par pays et par semaine,
+    colonne 0 = date, colonne 1 = code pays (« FR_ »), colonne 2 = Euro-super 95, colonne 3 = gazole, en €/1000 L."""
     book = eu_book()
     sheet = next((n for n in book if re.search(r"with\s*tax", n, re.I)), None)
     if sheet is None:
         raise ValueError("onglet 'with taxes' introuvable : " + ", ".join(book))
     df = book[sheet]
-    prod_pat = r"super|95|petrol|essence" if product == "essence" else r"diesel|gas\s*oil|gasoil"
-    # en-tête sur plusieurs lignes : on concatène les 6 premières lignes de chaque colonne
-    head = [" ".join(str(x) for x in df.iloc[:6, j].tolist()) for j in range(df.shape[1])]
-    # la colonne pays peut être fusionnée : on propage le dernier code pays vu vers la droite
-    country, cols = None, []
-    for j, h in enumerate(head):
-        m = re.search(r"\b([A-Z]{2})\b", h)
-        if m and m.group(1) not in ("EU", "NA"):
-            country = m.group(1)
-        if country == country_code and re.search(prod_pat, h, re.I):
-            cols.append(j)
-    if not cols:
-        raise ValueError(f"colonne {country_code}/{product} introuvable")
-    dates = pd.to_datetime(df.iloc[:, 0], errors="coerce", dayfirst=True)
-    s = pd.Series(pd.to_numeric(df.iloc[:, cols[0]], errors="coerce").values, index=dates)
-    s = clean(s)
+    head = " ".join(str(x) for x in df.iloc[:3, :].values.ravel())
+    col = 2 if product == "essence" else 3
+    if product == "essence" and not re.search(r"super\s*95|euro95", head, re.I):
+        raise ValueError("colonne Euro-super 95 introuvable")
+    ctr = df.iloc[:, 1].astype(str).str.strip().str.upper()
+    rows = df[ctr.str.startswith(country_code + "_") | (ctr == country_code)]
+    if rows.empty:
+        raise ValueError(f"aucune ligne pour le pays {country_code}")
+    dates = pd.to_datetime(rows.iloc[:, 0], errors="coerce")
+    s = clean(pd.Series(pd.to_numeric(rows.iloc[:, col], errors="coerce").values, index=dates))
     if s.median() > 100:                 # €/1000 L -> €/L
         s = s / 1000
     return s, "Commission européenne, Bulletin pétrolier"
