@@ -22,18 +22,29 @@
 </div></header>
 <main>
 
-<article class="wrap article">
-  <div class="read labhead">
-    <span class="eyebrow">04 · Lab · Projet n°1 · octobre 2026</span>
-    <h1>Préfinancer des producteurs de pétrole en difficulté</h1>
-    <p class="lede">Combien rapporte réellement un baril acheté à un producteur pressé, et combien faut-il lui en acheter sans risquer une perte inacceptable&nbsp;? Le projet construit la chaîne complète, des données brutes du Texas à l'allocation sous contrainte de risque.</p>
-    <div class="pills"><span class="pill">Python</span><span class="pill">Stata / Mata</span><span class="pill">Ornstein-Uhlenbeck</span><span class="pill">Merton / KMV</span><span class="pill">Logit</span><span class="pill">Monte Carlo</span><span class="pill">CVaR</span></div>
-    <div class="cta" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:6px"><a class="btn primary" href="assets/rapport_moteur_negoce.pdf">Lire le rapport (PDF, 9 pages)</a><a class="btn ghost" href="https://github.com/SidyHaidara/moteur-negoce-physique">Code sur GitHub</a></div>
-  </div>
 
+<article class="wrap article">
   <div class="read">
+    <span class="eyebrow">Lab</span>
+    <h1>Peut-on repérer un producteur de pétrole qui va s'arrêter, avant que ça arrive&nbsp;?</h1>
+    <p class="lede">Au Texas, des milliers de petites entreprises produisent du pétrole. Chaque mois, elles déclarent publiquement leur production. Quand le prix chute, beaucoup s'arrêtent. Peut-on voir venir celles qui vont s'arrêter&nbsp;?</p>
+    <p><b>Oui, en regardant leur production de près.</b> Un producteur qui va s'arrêter ne décline pas doucement&nbsp;: sa production devient <b>irrégulière</b>, avec des mois à zéro, puis chute d'un coup. C'est ce signal que le modèle apprend à reconnaître.</p>
+  </div>
+  <figure style="max-width:520px"><img src="assets/quintiles.png" alt="Taux de sortie de 5,5 % à 32,8 % selon le niveau de risque prédit" width="726" height="682"><figcaption>Les producteurs classés «&nbsp;les plus à risque&nbsp;» se sont arrêtés <b>six fois plus souvent</b> que les «&nbsp;moins à risque&nbsp;» (32,8&nbsp;% contre 5,5&nbsp;%).</figcaption></figure>
+  <div class="read">
+    <h2>Pourquoi on peut y croire</h2>
+    <ul>
+      <li><b>Un vrai test.</b> Le modèle a appris sur la crise de 2015. On l'a ensuite testé sur la crise de 2020, qu'il n'avait jamais vue&nbsp;: il a bien repéré qui allait s'arrêter.</li>
+      <li><b>De vraies données.</b> La production mensuelle de 12&nbsp;163 opérateurs, publiée par l'autorité pétrolière du Texas.</li>
+      <li><b>Aujourd'hui.</b> 13 producteurs encore actifs présentent un risque élevé. Je ne publie pas leurs noms&nbsp;: ce sont des probabilités, pas des certitudes.</li>
+    </ul>
+    <p><b>À quoi ça sert&nbsp;?</b> Un négociant qui avance de l'argent à ces producteurs veut savoir lesquels risquent de ne pas livrer. La suite, combien on gagne vraiment en les finançant, est sur la page <a href="modeles.html">Prix et risque</a>.</p>
+    <div class="cta" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:6px"><a class="btn primary" href="assets/rapport_moteur_negoce.pdf">Lire le rapport (PDF, 9 pages)</a><a class="btn ghost" href="https://github.com/SidyHaidara/moteur-negoce-physique">Code sur GitHub</a></div>
+    <details class="plus"><summary>Pour aller plus loin : la méthode complète, les chiffres et les limites</summary>
+    <div class="plus-body">
+<div class="read">
   <div class="result-box"><b>Partie 2&nbsp;:</b> sauts et valeurs extrêmes, prix plancher en option, arrêt optimal par Longstaff-Schwartz et CVA, avec les outils du M2 Probabilités et Finance. <a href="modeles.html">Lire la partie 2</a></div>
-  <h2>La démarche</h2>
+  <h3>La démarche</h3>
   <ol>
     <li><b>Prix</b>&nbsp;: modèle de Schwartz calibré sur le WTI 2010-2026, simulé sans erreur de discrétisation.</li>
     <li><b>Défaut lié au prix</b>&nbsp;: modèle de Merton avec le point de défaut de KMV, prix et défauts simulés ensemble.</li>
@@ -42,7 +53,7 @@
     <li><b>Allocation</b>&nbsp;: programme linéaire qui maximise le profit espéré sous un plafond de CVaR et une ligne de crédit.</li>
   </ol>
 
-  <h2>Résultat 1&nbsp;: le modèle aurait vu venir les sorties de 2021</h2>
+  <h3>Résultat 1&nbsp;: le modèle aurait vu venir les sorties de 2021</h3>
   <p>Estimé sur la crise de 2015, testé sans retouche sur celle de 2020&nbsp;: AUC de 0,71 (IC 95&nbsp;% bootstrap 0,65-0,78), contre 0,66 pour le seul déclin de production. En inversant le protocole, l'AUC vaut 0,70&nbsp;: le signal est stable d'une crise à l'autre.</p>
   </div>
   <div class="grid2">
@@ -52,29 +63,32 @@
   <div class="read">
   <p>Ce qui annonce une sortie n'est pas le déclin régulier, normal pour un puits de schiste, mais une production qui devient irrégulière et chute brutalement&nbsp;: une fois ces deux variables prises en compte, le déclin sur un an n'est plus significatif (p = 0,27).</p>
 
-  <h2>Résultat 2&nbsp;: la couverture protège contre l'erreur de modèle</h2>
+  <h3>Résultat 2&nbsp;: la couverture protège contre l'erreur de modèle</h3>
   <p>Sans couverture, le gain moyen par baril passe de +3,89&nbsp;$ à −3,36&nbsp;$ selon la valeur de κ retenue dans son intervalle de confiance. Couvert, il reste à 2,64&nbsp;$ dans tous les cas.</p>
   <figure><img src="assets/kappa.png" alt="Gain moyen non couvert de +3,89 à −3,36 dollars selon kappa, couvert constant à 2,64 dollars" loading="lazy" width="1452" height="528"><figcaption>Gain moyen par baril selon κ, avec et sans couverture (20&nbsp;000 scénarios).</figcaption></figure>
 
-  <h2>Résultat 3&nbsp;: les défauts arrivent ensemble</h2>
+  <h3>Résultat 3&nbsp;: les défauts arrivent ensemble</h3>
   <p>Sur un portefeuille diversifié de sept producteurs, la perte extrême augmente de 79&nbsp;% quand les défauts suivent le prix, et la probabilité de défauts en chaîne passe de 4&nbsp;% à 23&nbsp;%. Voir la fiche <a href="methodes.html#wwr">wrong-way risk</a>.</p>
 
-  <h2>Application à mai 2026</h2>
+  <h3>Application à mai 2026</h3>
   <p>Sur les 204 opérateurs texans produisant plus de 500 barils par jour, 13 produisent encore chaque mois mais présentent au moins 15&nbsp;% de risque de sortie sur deux ans, pour environ 45&nbsp;000 barils par jour au total. Leurs noms ne sont pas publiés&nbsp;: ce sont des prédictions statistiques, pas des constats.</p>
 
-  <h2>Limites</h2>
+  <h3>Limites</h3>
   <ul>
     <li>Une sortie peut être une faillite ou une cession de baux&nbsp;; il faut croiser avec les dépôts de bilan (Chapter 11).</li>
     <li>Deux crises seulement pour le backtest.</li>
     <li>La relation entre détresse et décote est une hypothèse&nbsp;: aucune donnée publique sur les prix de préfinancement.</li>
     <li>L'irrégularité de production ne distingue pas une montée en charge d'une détresse&nbsp;: deux opérateurs en forte croissance sont des faux positifs probables.</li>
   </ul>
-  <h2>Prochaines étapes</h2>
+  <h3>Prochaines étapes</h3>
   <ul>
     <li>Rapprocher les sorties des faillites réelles de 2015-2021.</li>
     <li>Modèle de Schwartz-Smith à deux facteurs sur la courbe des futures, par filtre de Kalman.</li>
     <li>Valoriser un prix plancher intégré au préfinancement.</li>
   </ul>
+  </div>
+
+    </div></details>
   </div>
 </article>
 </main>
