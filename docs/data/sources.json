@@ -1,0 +1,55 @@
+{
+ "mise_a_jour": "2026-10-12T20:34+00:00",
+ "sources": {
+  "wti": {
+   "ok": true,
+   "source": "EIA (miroir datasets/oil-prices)",
+   "points": 9516,
+   "debut": "1986-01-02",
+   "fin": "2026-10-06"
+  },
+  "brent": {
+   "ok": true,
+   "source": "EIA (miroir datasets/oil-prices)",
+   "points": 9102,
+   "debut": "1987-05-20",
+   "fin": "2026-10-06"
+  },
+  "opep": {
+   "ok": false,
+   "erreur": "ProxyError: HTTPSConnectionPool(host='www.opec.org', port=443): Max retries exceeded with url: /basket/basketDayArchives.xml (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+   "trace": "api.py\", line 71, in request\n    return session.request(method=method, url=url, **kwargs)\n           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/.local/lib/python3.13/site-packages/requests/sessions.py\", line 651, in request\n    resp = self.send(prep, **send_kwargs)\n  File \"/root/.local/lib/python3.13/site-packages/requests/sessions.py\", line 784, in send\n    r = adapter.send(request, **kwargs)\n  File \"/root/.local/lib/python3.13/site-packages/requests/adapters.py\", line 723, in send\n    raise ProxyError(e, request=request)\nrequests.exceptions.ProxyError: HTTPSConnectionPool(host='www.opec.org', port=443): Max retries exceeded with url: /basket/basketDayArchives.xml (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))\n"
+  },
+  "essence_ny": {
+   "ok": false,
+   "erreur": "ProxyError: HTTPSConnectionPool(host='www.eia.gov', port=443): Max retries exceeded with url: /dnav/pet/xls/PET_PRI_SPT_S1_D.xls (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+   "trace": "py\", line 71, in request\n    return session.request(method=method, url=url, **kwargs)\n           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/.local/lib/python3.13/site-packages/requests/sessions.py\", line 651, in request\n    resp = self.send(prep, **send_kwargs)\n  File \"/root/.local/lib/python3.13/site-packages/requests/sessions.py\", line 784, in send\n    r = adapter.send(request, **kwargs)\n  File \"/root/.local/lib/python3.13/site-packages/requests/adapters.py\", line 723, in send\n    raise ProxyError(e, request=request)\nrequests.exceptions.ProxyError: HTTPSConnectionPool(host='www.eia.gov', port=443): Max retries exceeded with url: /dnav/pet/xls/PET_PRI_SPT_S1_D.xls (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))\n"
+  },
+  "diesel_ny": {
+   "ok": false,
+   "erreur": "ProxyError: HTTPSConnectionPool(host='www.eia.gov', port=443): Max retries exceeded with url: /dnav/pet/xls/PET_PRI_SPT_S1_D.xls (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+   "trace": "py\", line 71, in request\n    return session.request(method=method, url=url, **kwargs)\n           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/.local/lib/python3.13/site-packages/requests/sessions.py\", line 651, in request\n    resp = self.send(prep, **send_kwargs)\n  File \"/root/.local/lib/python3.13/site-packages/requests/sessions.py\", line 784, in send\n    r = adapter.send(request, **kwargs)\n  File \"/root/.local/lib/python3.13/site-packages/requests/adapters.py\", line 723, in send\n    raise ProxyError(e, request=request)\nrequests.exceptions.ProxyError: HTTPSConnectionPool(host='www.eia.gov', port=443): Max retries exceeded with url: /dnav/pet/xls/PET_PRI_SPT_S1_D.xls (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))\n"
+  },
+  "sp95_fr": {
+   "ok": false,
+   "erreur": "ProxyError: HTTPSConnectionPool(host='energy.ec.europa.eu', port=443): Max retries exceeded with url: /document/download/906e60ca-8b6a-44e7-8589-652854d2fd3f_en?filename=Weekly_Oil_Bulletin_Prices_History_maticni_4web.xlsx (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+   "trace": "   ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/.local/lib/python3.13/site-packages/requests/sessions.py\", line 651, in request\n    resp = self.send(prep, **send_kwargs)\n  File \"/root/.local/lib/python3.13/site-packages/requests/sessions.py\", line 784, in send\n    r = adapter.send(request, **kwargs)\n  File \"/root/.local/lib/python3.13/site-packages/requests/adapters.py\", line 723, in send\n    raise ProxyError(e, request=request)\nrequests.exceptions.ProxyError: HTTPSConnectionPool(host='energy.ec.europa.eu', port=443): Max retries exceeded with url: /document/download/906e60ca-8b6a-44e7-8589-652854d2fd3f_en?filename=Weekly_Oil_Bulletin_Prices_History_maticni_4web.xlsx (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))\n"
+  },
+  "apercu_ue": "ProxyError: HTTPSConnectionPool(host='energy.ec.europa.eu', port=443): Max retries exceeded with url: /document/download/906e60ca-8b6a-44e7-8589-652854d2fd3f_en?filename=Weekly_Oil_Bulletin_Prices_History_maticni_4web.xlsx (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+  "gazole_fr": {
+   "ok": false,
+   "erreur": "ProxyError: HTTPSConnectionPool(host='energy.ec.europa.eu', port=443): Max retries exceeded with url: /document/download/906e60ca-8b6a-44e7-8589-652854d2fd3f_en?filename=Weekly_Oil_Bulletin_Prices_History_maticni_4web.xlsx (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+   "trace": "   ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/.local/lib/python3.13/site-packages/requests/sessions.py\", line 651, in request\n    resp = self.send(prep, **send_kwargs)\n  File \"/root/.local/lib/python3.13/site-packages/requests/sessions.py\", line 784, in send\n    r = adapter.send(request, **kwargs)\n  File \"/root/.local/lib/python3.13/site-packages/requests/adapters.py\", line 723, in send\n    raise ProxyError(e, request=request)\nrequests.exceptions.ProxyError: HTTPSConnectionPool(host='energy.ec.europa.eu', port=443): Max retries exceeded with url: /document/download/906e60ca-8b6a-44e7-8589-652854d2fd3f_en?filename=Weekly_Oil_Bulletin_Prices_History_maticni_4web.xlsx (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))\n"
+  },
+  "sp95_de": {
+   "ok": false,
+   "erreur": "ProxyError: HTTPSConnectionPool(host='energy.ec.europa.eu', port=443): Max retries exceeded with url: /document/download/906e60ca-8b6a-44e7-8589-652854d2fd3f_en?filename=Weekly_Oil_Bulletin_Prices_History_maticni_4web.xlsx (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+   "trace": "   ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/.local/lib/python3.13/site-packages/requests/sessions.py\", line 651, in request\n    resp = self.send(prep, **send_kwargs)\n  File \"/root/.local/lib/python3.13/site-packages/requests/sessions.py\", line 784, in send\n    r = adapter.send(request, **kwargs)\n  File \"/root/.local/lib/python3.13/site-packages/requests/adapters.py\", line 723, in send\n    raise ProxyError(e, request=request)\nrequests.exceptions.ProxyError: HTTPSConnectionPool(host='energy.ec.europa.eu', port=443): Max retries exceeded with url: /document/download/906e60ca-8b6a-44e7-8589-652854d2fd3f_en?filename=Weekly_Oil_Bulletin_Prices_History_maticni_4web.xlsx (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))\n"
+  },
+  "gazole_de": {
+   "ok": false,
+   "erreur": "ProxyError: HTTPSConnectionPool(host='energy.ec.europa.eu', port=443): Max retries exceeded with url: /document/download/906e60ca-8b6a-44e7-8589-652854d2fd3f_en?filename=Weekly_Oil_Bulletin_Prices_History_maticni_4web.xlsx (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+   "trace": "   ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/.local/lib/python3.13/site-packages/requests/sessions.py\", line 651, in request\n    resp = self.send(prep, **send_kwargs)\n  File \"/root/.local/lib/python3.13/site-packages/requests/sessions.py\", line 784, in send\n    r = adapter.send(request, **kwargs)\n  File \"/root/.local/lib/python3.13/site-packages/requests/adapters.py\", line 723, in send\n    raise ProxyError(e, request=request)\nrequests.exceptions.ProxyError: HTTPSConnectionPool(host='energy.ec.europa.eu', port=443): Max retries exceeded with url: /document/download/906e60ca-8b6a-44e7-8589-652854d2fd3f_en?filename=Weekly_Oil_Bulletin_Prices_History_maticni_4web.xlsx (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))\n"
+  }
+ }
+}

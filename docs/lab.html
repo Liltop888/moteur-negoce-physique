@@ -3,36 +3,36 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Étape 1 · Qui financer · Comptoir</title>
+<title>Lab · Moteur de négoce physique · Comptoir</title>
 <meta name="description" content="Projet : prédire la sortie des producteurs de pétrole texans et décider combien les préfinancer, avec un backtest sur les crises de 2015 et 2020.">
-<meta property="og:title" content="Étape 1 · Qui financer · Comptoir">
+<meta property="og:title" content="Lab · Moteur de négoce physique · Comptoir">
 <meta property="og:description" content="Projet : prédire la sortie des producteurs de pétrole texans et décider combien les préfinancer, avec un backtest sur les crises de 2015 et 2020.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#F6F0E8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap">
 <link rel="stylesheet" href="assets/style.css">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%231f4f8a'/%3E%3Ctext x='16' y='23' font-family='Arial' font-weight='700' font-size='19' text-anchor='middle' fill='white'%3EC%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23b5532e'/%3E%3Ctext x='16' y='23' font-family='Arial' font-weight='700' font-size='19' text-anchor='middle' fill='white'%3EC%3C/text%3E%3C/svg%3E">
 </head>
 <body>
 <header class="top"><div class="wrap">
 <a class="brand" href="index.html">Comptoir<span>.</span></a>
-<nav class="nav" aria-label="Navigation principale"><a href="index.html">Le trade</a><a href="lab.html" aria-current="page">1 · Qui financer</a><a href="modeles.html">2 · Prix et risque</a><a href="outils.html">Simulateurs</a><a href="a-propos.html">À propos</a></nav>
+<nav class="nav" aria-label="Navigation principale"><a href="index.html">Accueil</a><a href="comprendre.html">Comprendre</a><a href="methodes.html">Méthodes</a><a href="outils.html">Outils</a><a href="previsions.html">Prévisions</a><a href="lab.html" aria-current="page">Lab</a><a href="modeles.html">Modèles M2</a><a href="a-propos.html">À propos</a></nav>
 </div></header>
 <main>
 
 <article class="wrap article">
   <div class="read labhead">
-    <span class="eyebrow">Étape 1 · Qui financer</span>
-    <h1>Repérer les producteurs de pétrole en difficulté, avant qu'ils ne s'arrêtent</h1>
+    <span class="eyebrow">04 · Lab · Projet n°1 · octobre 2026</span>
+    <h1>Préfinancer des producteurs de pétrole en difficulté</h1>
     <p class="lede">Combien rapporte réellement un baril acheté à un producteur pressé, et combien faut-il lui en acheter sans risquer une perte inacceptable&nbsp;? Le projet construit la chaîne complète, des données brutes du Texas à l'allocation sous contrainte de risque.</p>
     <div class="pills"><span class="pill">Python</span><span class="pill">Stata / Mata</span><span class="pill">Ornstein-Uhlenbeck</span><span class="pill">Merton / KMV</span><span class="pill">Logit</span><span class="pill">Monte Carlo</span><span class="pill">CVaR</span></div>
     <div class="cta" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:6px"><a class="btn primary" href="assets/rapport_moteur_negoce.pdf">Lire le rapport (PDF, 9 pages)</a><a class="btn ghost" href="https://github.com/Liltop888/moteur-negoce-physique">Code sur GitHub</a></div>
   </div>
 
   <div class="read">
-  <div class="result-box"><b>En une phrase&nbsp;:</b> sur la crise de 2020, qu'il n'avait jamais vue, le modèle range les opérateurs qui vont s'arrêter dans le cinquième le plus risqué six fois plus souvent que dans le plus sûr (32,8&nbsp;% contre 5,5&nbsp;%). Il en sort 13 cibles actives aujourd'hui. <a href="index.html">Ce qu'on en fait&nbsp;: la note de trading</a> · <a href="modeles.html">Étape 2&nbsp;: prix et risque</a></div>
+  <div class="result-box"><b>Partie 2&nbsp;:</b> sauts et valeurs extrêmes, prix plancher en option, arrêt optimal par Longstaff-Schwartz et CVA, avec les outils du M2 Probabilités et Finance. <a href="modeles.html">Lire la partie 2</a></div>
   <h2>La démarche</h2>
   <ol>
     <li><b>Prix</b>&nbsp;: modèle de Schwartz calibré sur le WTI 2010-2026, simulé sans erreur de discrétisation.</li>
@@ -57,7 +57,7 @@
   <figure><img src="assets/kappa.png" alt="Gain moyen non couvert de +3,89 à −3,36 dollars selon kappa, couvert constant à 2,64 dollars" loading="lazy" width="1452" height="528"><figcaption>Gain moyen par baril selon κ, avec et sans couverture (20&nbsp;000 scénarios).</figcaption></figure>
 
   <h2>Résultat 3&nbsp;: les défauts arrivent ensemble</h2>
-  <p>Sur un portefeuille diversifié de sept producteurs, la perte extrême augmente de 79&nbsp;% quand les défauts suivent le prix, et la probabilité de défauts en chaîne passe de 4&nbsp;% à 23&nbsp;%. Voir la fiche <a href="modeles.html#cva">wrong-way risk</a>.</p>
+  <p>Sur un portefeuille diversifié de sept producteurs, la perte extrême augmente de 79&nbsp;% quand les défauts suivent le prix, et la probabilité de défauts en chaîne passe de 4&nbsp;% à 23&nbsp;%. Voir la fiche <a href="methodes.html#wwr">wrong-way risk</a>.</p>
 
   <h2>Application à mai 2026</h2>
   <p>Sur les 204 opérateurs texans produisant plus de 500 barils par jour, 13 produisent encore chaque mois mais présentent au moins 15&nbsp;% de risque de sortie sur deux ans, pour environ 45&nbsp;000 barils par jour au total. Leurs noms ne sont pas publiés&nbsp;: ce sont des prédictions statistiques, pas des constats.</p>
@@ -79,7 +79,7 @@
 </article>
 </main>
 <footer><div class="wrap">
-<span>Comptoir · Recherche en négoce physique de pétrole · Sidy Ali Haidara, Paris, 2026</span>
+<span>Comptoir · Négoce physique et finance quantitative, expliqués par les chiffres · Sidy Ali Haidara, Paris, 2026</span>
 <span><a href="https://github.com/Liltop888/moteur-negoce-physique">Code source sur GitHub</a></span>
 </div></footer>
 

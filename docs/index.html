@@ -3,80 +3,67 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Comptoir · Préfinancer les producteurs de pétrole en difficulté</title>
-<meta name="description" content="Note de trading : qui préfinancer parmi les producteurs texans en difficulté, sous quelle structure, à quel prix, pour quel rendement et quel pire cas. Données réelles, code ouvert.">
-<meta property="og:title" content="Comptoir · Préfinancer les producteurs de pétrole en difficulté">
-<meta property="og:description" content="Note de trading : qui préfinancer parmi les producteurs texans en difficulté, sous quelle structure, à quel prix, pour quel rendement et quel pire cas. Données réelles, code ouvert.">
+<title>Comptoir</title>
+<meta name="description" content="Le négoce physique des matières premières et la finance quantitative, expliqués avec des données réelles, du code et des outils interactifs.">
+<meta property="og:title" content="Comptoir">
+<meta property="og:description" content="Le négoce physique des matières premières et la finance quantitative, expliqués avec des données réelles, du code et des outils interactifs.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#F6F0E8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap">
 <link rel="stylesheet" href="assets/style.css">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%231f4f8a'/%3E%3Ctext x='16' y='23' font-family='Arial' font-weight='700' font-size='19' text-anchor='middle' fill='white'%3EC%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23b5532e'/%3E%3Ctext x='16' y='23' font-family='Arial' font-weight='700' font-size='19' text-anchor='middle' fill='white'%3EC%3C/text%3E%3C/svg%3E">
 </head>
 <body>
 <header class="top"><div class="wrap">
 <a class="brand" href="index.html">Comptoir<span>.</span></a>
-<nav class="nav" aria-label="Navigation principale"><a href="index.html" aria-current="page">Le trade</a><a href="lab.html">1 · Qui financer</a><a href="modeles.html">2 · Prix et risque</a><a href="outils.html">Simulateurs</a><a href="a-propos.html">À propos</a></nav>
+<nav class="nav" aria-label="Navigation principale"><a href="index.html" aria-current="page">Accueil</a><a href="comprendre.html">Comprendre</a><a href="methodes.html">Méthodes</a><a href="outils.html">Outils</a><a href="previsions.html">Prévisions</a><a href="lab.html">Lab</a><a href="modeles.html">Modèles M2</a><a href="a-propos.html">À propos</a></nav>
 </div></header>
 <main>
 
 <div class="wrap">
   <div class="hero">
-    <span class="eyebrow">Note de trading · octobre 2026 · pétrole brut, Texas</span>
-    <h1>Préfinancer les petits producteurs en difficulté&nbsp;: sur <em>3 mois</em>, pas sur 12.</h1>
-    <p class="lede">Un producteur à court de cash vend son pétrole avec une décote à qui le paie d'avance. J'ai cherché qui sont ces producteurs, ce que coûte vraiment chaque baril une fois le risque payé, et quelle structure garde la marge. La réponse tient en une ligne&nbsp;: un prépaiement glissant de 3 mois, couvert par des futures, ne coûte que 1,51&nbsp;$ par baril&nbsp;; sur 12 mois, il en coûte 6,04&nbsp;$ et la marge disparaît.</p>
-  </div>
-  <div class="figure-strip" style="margin:0 0 8px">
-    <div class="stat"><b>13</b><span>producteurs texans ciblés, environ 45&nbsp;000 barils par jour</span></div>
-    <div class="stat"><b>1,51&nbsp;$</b><span>décote minimale par baril pour couvrir défaut, financement et plancher (3 mois)</span></div>
-    <div class="stat"><b>17 à 41&nbsp;%</b><span>rendement annuel du capital, selon la décote obtenue (4&nbsp;$ à 7,40&nbsp;$)</span></div>
-    <div class="stat"><b>6,7&nbsp;M$</b><span>perte de crédit dans le pire trimestre sur 100, pour 10&nbsp;000 b/j</span></div>
+    <span class="eyebrow">Négoce physique · finance quantitative</span>
+    <h1>Comment gagne-t-on de l'argent avec un baril de <em>pétrole</em>&nbsp;?</h1>
+    <p class="lede">Comptoir explique le négoce physique des matières premières avec des chiffres réels&nbsp;: comment se forme une marge, d'où vient le risque, et quels modèles utilisent les desks pour décider. Avec les données, le code et des outils pour tester par soi-même.</p>
+    <div class="cta"><a class="btn primary" href="#hub">Entrer dans le hub</a><a class="btn ghost" href="lab.html">Voir le dernier projet</a></div>
   </div>
 </div>
 
-<section><div class="wrap">
-  <div style="max-width:980px">
-    <span class="eyebrow">La recommandation</span>
-    <h2>Cinq décisions</h2>
-    <div class="table-wrap"><table>
-      <tr><th>Question</th><th>Décision</th><th>Pourquoi</th></tr>
-      <tr><td><b>Qui</b></td><td>13 opérateurs texans de plus de 500 b/j, encore actifs, avec au moins 15&nbsp;% de risque de sortie à deux ans</td><td>Le modèle de détresse classe correctement 71&nbsp;% des paires sur une crise qu'il n'a pas vue (<a href="lab.html">étape 1</a>)</td></tr>
-      <tr><td><b>Quelle structure</b></td><td>Prépaiement glissant de 3 mois, renouvelé chaque trimestre</td><td>Le risque de défaut et le coût du financement grandissent avec la durée&nbsp;: 1,51&nbsp;$ de coût à 3 mois, 6,04&nbsp;$ à 12 mois</td></tr>
-      <tr><td><b>Quel prix</b></td><td>Exiger au moins 1,51&nbsp;$ de décote&nbsp;; viser 4&nbsp;$ ou plus</td><td>À 4&nbsp;$, le capital rapporte 17&nbsp;% par an&nbsp;; à 7,40&nbsp;$, 41&nbsp;%</td></tr>
-      <tr><td><b>Quelle garantie offrir</b></td><td>Un plancher sur le prix moyen à 70&nbsp;$, pas un plancher mensuel à 80&nbsp;$</td><td>Le premier coûte 0,25&nbsp;$ par baril sur 3 mois&nbsp;; le second mangerait presque toute la décote</td></tr>
-      <tr><td><b>Combien et quelle limite</b></td><td>10&nbsp;000 b/j au total, environ 770 par producteur, prix couvert par vente de futures</td><td>52&nbsp;M$ de capital, 9 à 22&nbsp;M$ de profit par an, pire trimestre de crédit 6,7&nbsp;M$</td></tr>
-    </table></div>
-  </div>
-  <figure style="max-width:760px"><img src="assets/fig_deal.png" alt="Coût par baril selon la durée : 1,51 dollar à 3 mois, 2,96 à 6 mois, 6,04 à 12 mois, pour une décote de 7,40 dollars" width="1460" height="840"><figcaption>Coût par baril préfinancé selon la durée du prépaiement, et rendement du capital avec une décote de 7,40&nbsp;$. Simulation de 100&nbsp;000 trajectoires du prix et des défauts.</figcaption></figure>
+<section id="hub"><div class="wrap">
+  <span class="eyebrow">Le hub</span>
+  <nav class="hub" aria-label="Rubriques">
+    <a href="comprendre.html"><span class="n">01</span><h3>Comprendre</h3><p>Les bases du négoce physique&nbsp;: d'où vient la marge, logistique, qualité du brut, préfinancement, couverture.</p></a>
+    <a href="methodes.html"><span class="n">02</span><h3>Méthodes</h3><p>Les modèles des desks, expliqués avec un exemple concret avant les équations.</p></a>
+    <a href="outils.html"><span class="n">03</span><h3>Outils</h3><p>Calculez le rendement net d'un baril et voyez ce que la couverture change, scénario par scénario.</p></a>
+    <a href="lab.html"><span class="n">04</span><h3>Lab</h3><p>Mes projets, sur données réelles, avec le code, le rapport et les limites.</p></a>
+    <a href="previsions.html"><span class="n">05</span><h3>Prévisions</h3><p>Chaque lundi, une fourchette à 90&nbsp;% pour le brut et les carburants, notée après coup.</p></a>
+  </nav>
 </div></section>
 
-<section><div class="wrap"><div class="read">
-  <span class="eyebrow">Ce qui peut faire perdre de l'argent</span>
-  <h2>Les risques, chiffrés</h2>
-  <ul>
-    <li><b>Le marché est agité en ce moment.</b> La perte journalière à 1&nbsp;% de probabilité est de 12,8&nbsp;% aujourd'hui, contre 4 à 5&nbsp;% en période calme. Il faut donc couvrir le prix avant de signer, pas après.</li>
-    <li><b>Les krachs sont plus violents que ne le prévoit une loi normale.</b> Une perte d'un jour sur mille atteint 25&nbsp;% sur le WTI, pas 9&nbsp;%. Seul un modèle qui suit la volatilité du jour et traite à part les chocs extrêmes a tenu sur 2020-2026.</li>
-    <li><b>Les producteurs font défaut ensemble.</b> Ils vendent tous le même baril&nbsp;: quand le prix chute, les défauts arrivent en grappe. Sur le portefeuille, cela augmente la perte extrême de 23&nbsp;% par rapport à des défauts indépendants. La limite par producteur compte plus que le nombre de producteurs.</li>
-    <li><b>Le retour du prix vers 65&nbsp;$ est incertain.</b> La vitesse de ce retour est mal mesurée par les données. Stocker du pétrole en pariant dessus est risqué&nbsp;: la couverture par futures protège contre cette erreur de modèle.</li>
-    <li><b>Une sortie de production n'est pas toujours une faillite.</b> Certains opérateurs cèdent leurs puits à un autre. Les 13 noms sont des pistes à vérifier un par un, pas des cibles certaines.</li>
-  </ul>
-  <p class="muted" style="font-size:.95rem">Hypothèses&nbsp;: dernier prix WTI 96,24&nbsp;$ (6 octobre 2026)&nbsp;; probabilité de défaut de 15&nbsp;% par an, plus forte quand le prix baisse&nbsp;; récupération de 50&nbsp;% de la valeur des réserves nanties&nbsp;; financement à 4&nbsp;%. La décote obtenue est une hypothèse de négociation&nbsp;: aucune donnée publique ne la mesure. Les noms des producteurs ne sont pas publiés.</p>
-</div></div></section>
-
 <section><div class="wrap">
-  <span class="eyebrow">Le détail des calculs</span>
-  <nav class="hub" aria-label="Étapes">
-    <a href="lab.html"><span class="n">Étape 1</span><h3>Qui financer</h3><p>Repérer les producteurs en difficulté dans la production mensuelle des 12&nbsp;163 opérateurs texans, avec un test sur la crise de 2020.</p></a>
-    <a href="modeles.html"><span class="n">Étape 2</span><h3>Prix et risque</h3><p>Krachs et limites de risque, valeur du plancher, option de stockage, coût du défaut.</p></a>
-    <a href="outils.html"><span class="n">Simulateurs</span><h3>Refaire le calcul</h3><p>Changez la décote, le prix ou la volatilité, et voyez ce qu'il reste par baril.</p></a>
-    <a href="https://github.com/Liltop888/moteur-negoce-physique"><span class="n">Code</span><h3>Tout reproduire</h3><p>Python et Stata, données publiques, résultats identiques à ceux de cette page.</p></a>
-  </nav>
+  <span class="eyebrow">Au Lab en ce moment</span>
+  <h2>Prédire les producteurs de pétrole en difficulté, et mesurer ce que coûte de les financer</h2>
+  <p class="lede" style="margin-top:14px">Un modèle entraîné sur la crise de 2015 et testé sur celle de 2020, à partir de la production mensuelle des 12&nbsp;163 opérateurs du Texas.</p>
+  <div class="figure-strip" style="margin:28px 0 22px">
+    <div class="stat"><b>0,71</b><span>AUC hors échantillon sur la crise de 2020</span></div>
+    <div class="stat"><b>×6</b><span>plus de sorties dans le quintile le plus risqué que dans le plus sûr</span></div>
+    <div class="stat"><b>+79&nbsp;%</b><span>de perte extrême quand les défauts suivent le prix</span></div>
+    <div class="stat"><b>12&nbsp;163</b><span>opérateurs texans, production mensuelle 1993-2026</span></div>
+  </div>
+  <div class="cta" style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn primary" href="lab.html">Partie 1&nbsp;: trouver les producteurs</a><a class="btn ghost" href="modeles.html">Partie 2&nbsp;: valoriser l'accord avec les modèles du M2</a></div>
+</div></section>
+
+<section><div class="wrap read">
+  <span class="eyebrow">Pourquoi ce site</span>
+  <p>Le négoce de matières premières pèse des milliers de milliards de dollars par an, mais il reste peu expliqué en dehors des maisons de négoce et des desks des banques. Les manuels de finance parlent d'actions et d'options&nbsp;; ils parlent rarement de barils qui voyagent, de bruts plus ou moins soufrés ou de producteurs qu'on préfinance.</p>
+  <p>Comptoir est mon carnet de travail public. J'y explique ce que j'apprends en M1 d'économétrie et dans mes projets, en partant d'exemples concrets, et j'y publie le code et les limites de chaque résultat. Le site évoluera au fil des projets.</p>
+  <p><a href="a-propos.html">Qui écrit ce site</a> · <a href="https://github.com/Liltop888/moteur-negoce-physique">Le code sur GitHub</a></p>
 </div></section>
 </main>
 <footer><div class="wrap">
-<span>Comptoir · Recherche en négoce physique de pétrole · Sidy Ali Haidara, Paris, 2026</span>
+<span>Comptoir · Négoce physique et finance quantitative, expliqués par les chiffres · Sidy Ali Haidara, Paris, 2026</span>
 <span><a href="https://github.com/Liltop888/moteur-negoce-physique">Code source sur GitHub</a></span>
 </div></footer>
 

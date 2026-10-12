@@ -2,16 +2,16 @@
    Mise en page : colonne de lecture de 68 caractères, grilles pour le hub et les outils.
    Palette : papier crème, encre noire, accent bleu marine, ambre « brut ». */
 :root {
-  --bg: #ffffff;
-  --surface: #f4f7fb;
-  --ink: #0b1f3a;
-  --muted: #5a6b80;
-  --rule: #dfe6ef;
-  --accent: #1559c9;
-  --accent-soft: #1559c914;
-  --amber: #1559c9;
-  --pos: #12805c;
-  --neg: #c2412d;
+  --bg: #f6f0e8;
+  --surface: #fbf7f1;
+  --ink: #2a2118;
+  --muted: #6e6253;
+  --rule: #e4d9ca;
+  --accent: #b5532e;
+  --accent-soft: #b5532e14;
+  --amber: #b5532e;
+  --pos: #3f7a4a;
+  --neg: #b5402e;
   --display: "Source Serif 4", Georgia, "Times New Roman", serif;
   --body: "Inter", -apple-system, "Segoe UI", sans-serif;
   --ui: "Inter", -apple-system, "Segoe UI", sans-serif;
@@ -145,5 +145,10 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
 .synth td.pos { color: var(--pos); font-family: var(--mono); }
 .synth tr.total td { border-top: 1.5px solid var(--ink); font-weight: 600; }
 
-/* Sections alternées, ton clair */
-section:nth-of-type(even) { background: var(--surface); }
+
+/* Prévisions */
+.pv-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+.pv-tab { font: 500 .88rem var(--ui); padding: 7px 13px; border-radius: 99px; border: 1px solid var(--rule); background: var(--surface); color: var(--ink); cursor: pointer; }
+.pv-tab[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+#pv-table td a { font-weight: 600; text-decoration: none; }
+canvas#pv-chart { height: auto; aspect-ratio: 1100 / 560; }

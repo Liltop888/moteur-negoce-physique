@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Prévisions · Comptoir</title>
+<meta name="description" content="Fourchettes de prévision à 90 % pour le pétrole brut et les carburants (WTI, Brent, OPEP, essence et diesel en Europe et aux États-Unis), mises à jour chaque semaine et notées après coup.">
+<meta property="og:title" content="Prévisions · Comptoir">
+<meta property="og:description" content="Fourchettes de prévision à 90 % pour le pétrole brut et les carburants (WTI, Brent, OPEP, essence et diesel en Europe et aux États-Unis), mises à jour chaque semaine et notées après coup.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#F6F0E8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23b5532e'/%3E%3Ctext x='16' y='23' font-family='Arial' font-weight='700' font-size='19' text-anchor='middle' fill='white'%3EC%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="top"><div class="wrap">
+<a class="brand" href="index.html">Comptoir<span>.</span></a>
+<nav class="nav" aria-label="Navigation principale"><a href="index.html">Accueil</a><a href="comprendre.html">Comprendre</a><a href="methodes.html">Méthodes</a><a href="outils.html">Outils</a><a href="previsions.html" aria-current="page">Prévisions</a><a href="lab.html">Lab</a><a href="modeles.html">Modèles M2</a><a href="a-propos.html">À propos</a></nav>
+</div></header>
+<main>
+<div class="wrap article">
+  <div class="read">
+    <span class="eyebrow">Prévisions · mises à jour chaque lundi</span>
+    <h1>Où sera le prix du pétrole dans une semaine&nbsp;? Dans un mois&nbsp;?</h1>
+    <p class="lede">Personne ne sait si le prix va monter ou baisser. On peut en revanche dire, avec une probabilité donnée, entre quelles bornes il se trouvera. Chaque lundi, ce tableau publie une fourchette à 90&nbsp;% pour le brut et les carburants, puis vérifie après coup si le vrai prix y est tombé.</p>
+    <p class="muted" id="pv-maj" style="font-family:var(--ui);font-size:.9rem">Chargement…</p>
+  </div>
+
+  <section style="padding-top:20px">
+    <div class="table-wrap"><table id="pv-table"></table></div>
+  </section>
+
+  <section id="graphique">
+    <div class="pv-tabs" id="pv-tabs" role="group" aria-label="Choisir un prix"></div>
+    <div class="tool" style="margin-top:20px">
+      <div class="fields">
+        <div><span class="eyebrow" id="pv-nom"></span><div class="big" id="pv-prix" style="font-size:2.2rem"></div><small class="muted" id="pv-date" style="font-family:var(--ui)"></small></div>
+        <div class="card"><dl><dt>Dans 1 semaine, 90&nbsp;% de chances entre</dt><dd id="pv-sem"></dd><dt>Dans 1 mois, 90&nbsp;% de chances entre</dt><dd id="pv-mois"></dd></dl></div>
+        <div class="card"><b style="font-family:var(--ui);font-size:.9rem">Le modèle a-t-il eu raison&nbsp;?</b><small class="muted" style="font-family:var(--ui)">Prévisions refaites sur les 3 dernières années, avec seulement l'information de chaque date. Objectif&nbsp;: 90&nbsp;%.</small><dl id="pv-bt"></dl><dl><dt>Prévisions publiées sur ce site</dt><dd id="pv-live"></dd></dl></div>
+      </div>
+      <div class="result">
+        <canvas id="pv-chart" width="1100" height="560" role="img" aria-label="Prix récents et éventail de prévision"></canvas>
+        <div class="legend"><span><i style="background:var(--ink)"></i>Prix observé</span><span><i style="background:var(--accent);opacity:.45"></i>50&nbsp;% de chances</span><span><i style="background:var(--accent);opacity:.2"></i>90&nbsp;% de chances</span><span><i style="background:transparent;border-top:2px dashed var(--accent);height:0;margin-top:6px"></i>Médiane</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="read">
+    <h2>Comment c'est calculé</h2>
+    <p><b>On ne parie pas sur la direction.</b> La fourchette est centrée sur le prix d'aujourd'hui&nbsp;: le modèle ne prétend pas savoir si le prix va monter. Il estime seulement de combien il peut bouger.</p>
+    <p><b>La volatilité change avec le temps.</b> Après un choc, le prix reste agité plusieurs semaines. Un modèle GARCH(1,1) estime chaque jour cette agitation à partir des derniers rendements. Les fourchettes s'élargissent donc en période de crise et se resserrent quand le marché est calme.</p>
+    <p><b>Les chocs gardent leur vraie forme.</b> Au lieu de supposer une loi normale, qui sous-estime les krachs, on réutilise les chocs réellement observés depuis dix ans, une fois retirée la volatilité du moment. On simule 4&nbsp;000 trajectoires futures, et la fourchette à 90&nbsp;% laisse 5&nbsp;% des scénarios de chaque côté.</p>
+    <div class="eq">σ²<sub>t+1</sub> = ω + α ε²<sub>t</sub> + β σ²<sub>t</sub>,&nbsp;&nbsp;&nbsp;ε<sub>t</sub> = σ<sub>t</sub> z<sub>t</sub>,&nbsp;&nbsp;z<sub>t</sub> tirés parmi les chocs observés</div>
+    <p><b>Un bon modèle se trompe 1 fois sur 10.</b> Une fourchette à 90&nbsp;% qui contient le prix 100&nbsp;% du temps est trop large, donc inutile. Si elle ne le contient que 70&nbsp;% du temps, elle sous-estime le risque. Le score affiché doit rester proche de 90&nbsp;%. La comparaison avec une loi normale à volatilité fixe est dans les données publiées.</p>
+    <p><b>Tout est daté.</b> Chaque prévision publiée est ajoutée au <a href="data/journal.csv">registre</a> le jour même et n'est jamais modifiée. L'historique complet est visible sur <a href="https://github.com/Liltop888/moteur-negoce-physique/commits/main/docs/data/journal.csv">GitHub</a>.</p>
+    <p class="muted" style="font-size:.9rem">Sources&nbsp;: U.S. Energy Information Administration (prix spot), OPEP (panier de référence), Commission européenne (Bulletin pétrolier hebdomadaire, prix à la pompe taxes comprises). Les prix à la pompe sont hebdomadaires et bougent moins que le brut, car les taxes y pèsent lourd&nbsp;: leurs fourchettes sont plus étroites.</p>
+  </section>
+</div>
+</main>
+<footer><div class="wrap">
+<span>Comptoir · Négoce physique et finance quantitative, expliqués par les chiffres · Sidy Ali Haidara, Paris, 2026</span>
+<span><a href="https://github.com/Liltop888/moteur-negoce-physique">Code source sur GitHub</a></span>
+</div></footer>
+<script src="assets/previsions.js"></script>
+</body>
+</html>

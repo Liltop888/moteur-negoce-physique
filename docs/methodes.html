@@ -1,1 +1,68 @@
-<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=index.html"><link rel="canonical" href="index.html"><title>Comptoir</title><a href="index.html">Comptoir</a>
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Méthodes · Comptoir</title>
+<meta name="description" content="Les modèles utilisés sur les desks de matières premières expliqués simplement : retour à la moyenne, défaut lié au prix, CVaR, backtest.">
+<meta property="og:title" content="Méthodes · Comptoir">
+<meta property="og:description" content="Les modèles utilisés sur les desks de matières premières expliqués simplement : retour à la moyenne, défaut lié au prix, CVaR, backtest.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#F6F0E8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23b5532e'/%3E%3Ctext x='16' y='23' font-family='Arial' font-weight='700' font-size='19' text-anchor='middle' fill='white'%3EC%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="top"><div class="wrap">
+<a class="brand" href="index.html">Comptoir<span>.</span></a>
+<nav class="nav" aria-label="Navigation principale"><a href="index.html">Accueil</a><a href="comprendre.html">Comprendre</a><a href="methodes.html" aria-current="page">Méthodes</a><a href="outils.html">Outils</a><a href="previsions.html">Prévisions</a><a href="lab.html">Lab</a><a href="modeles.html">Modèles M2</a><a href="a-propos.html">À propos</a></nav>
+</div></header>
+<main>
+
+<article class="wrap article"><div class="read">
+  <span class="eyebrow">02 · Méthodes</span>
+  <h1>Les modèles des desks, expliqués avec un exemple d'abord</h1>
+  <p class="lede">Chaque fiche part d'une situation concrète, puis montre le modèle et ce qu'il donne sur des données réelles. Les équations sont là pour ceux qui les veulent&nbsp;; l'idée doit se comprendre sans elles.</p>
+  <nav class="toc" aria-label="Sommaire">
+    <a href="#moyenne">Pourquoi le pétrole n'est pas une action&nbsp;: le retour à la moyenne</a>
+    <a href="#wwr">Le défaut qui arrive au pire moment&nbsp;: le wrong-way risk</a>
+    <a href="#cvar">Mesurer le pire&nbsp;: VaR et CVaR</a>
+    <a href="#backtest">Croire un modèle&nbsp;: le backtest hors échantillon</a>
+  </nav>
+
+  <h2 id="moyenne">Pourquoi le pétrole n'est pas une action</h2>
+  <p>Quand le pétrole monte très haut, les producteurs forent davantage et les consommateurs en utilisent moins&nbsp;: le prix finit par redescendre. Quand il s'effondre, des puits ferment et l'offre se contracte&nbsp;: le prix remonte. Le pétrole a donc tendance à revenir vers un niveau de long terme, proche de son coût de production. Une action, elle, n'a pas de niveau «&nbsp;normal&nbsp;» vers lequel revenir.</p>
+  <p>Le modèle de Schwartz (1997) traduit cette idée&nbsp;: le logarithme du prix est tiré vers un niveau μ, avec une force κ, et secoué par un bruit de volatilité σ.</p>
+  <div class="eq">d ln S<sub>t</sub> = κ (μ − ln S<sub>t</sub>) dt + σ dW<sub>t</sub></div>
+  <figure><img src="assets/wti.png" alt="Prix mensuel du WTI de 2010 à 2026, avec le niveau de long terme estimé à 65,47 dollars" loading="lazy" width="1452" height="572"><figcaption>Prix mensuel du WTI, 2010-2026 (FRED / EIA). Estimé sur 2015-2026&nbsp;: niveau de long terme 65,47&nbsp;$, volatilité 52&nbsp;% par an, demi-vie d'un écart environ 9 mois.</figcaption></figure>
+  <div class="keypoint">La force de rappel κ est très mal estimée&nbsp;: son intervalle de confiance va de 0,09 à 1,77. La demi-vie peut donc être de 5 mois comme de plusieurs années. Conclusion pratique&nbsp;: ce modèle sert à mesurer le risque, pas à parier sur une baisse.</div>
+
+  <h2 id="wwr">Le défaut qui arrive au pire moment</h2>
+  <p>Imaginez que vous avez préfinancé sept producteurs texans. Si leurs faillites étaient indépendantes, il serait très improbable que la moitié fasse défaut la même année. Mais ils vendent tous le même pétrole&nbsp;: quand le prix chute, ils souffrent tous en même temps. Et c'est justement quand le prix est bas que le pétrole que vous détenez vaut le moins.</p>
+  <p>Le modèle structurel de Merton (1974) formalise cela&nbsp;: un producteur fait défaut quand la valeur de sa production future passe sous sa dette exigible. Cette valeur dépend directement du prix, donc les défauts sont corrélés par le prix.</p>
+  <figure><img src="assets/wwr.png" alt="Perte extrême de 16,5 millions de dollars avec des défauts indépendants contre 29,5 millions avec des défauts liés au prix" loading="lazy" width="1452" height="550"><figcaption>Portefeuille de sept producteurs illustratifs. Même probabilité de défaut individuelle dans les deux cas&nbsp;; seule change la dépendance au prix.</figcaption></figure>
+  <p>Avec des défauts liés au prix, la perte moyenne dans les 5&nbsp;% pires scénarios passe de 16,5 à 29,5 millions de dollars, et la probabilité que la moitié des producteurs fasse défaut la même année passe de 4&nbsp;% à 23&nbsp;%. Diversifier entre producteurs d'un même bassin protège beaucoup moins qu'on ne le croit.</p>
+
+  <h2 id="cvar">Mesurer le pire&nbsp;: VaR et CVaR</h2>
+  <p>Simulez 100 années possibles pour votre portefeuille et classez-les de la pire à la meilleure. La <b>VaR à 95&nbsp;%</b> est la perte de la 5<sup>e</sup> pire année&nbsp;: «&nbsp;dans 95&nbsp;% des cas, on ne perd pas plus que ça&nbsp;». Elle ne dit rien des 5 années encore pires. La <b>CVaR à 95&nbsp;%</b> est la perte moyenne de ces 5 pires années&nbsp;: elle regarde à l'intérieur de la catastrophe.</p>
+  <div class="example"><span class="eyebrow">Exemple</span>Les cinq pires années perdent 2, 3, 4, 6 et 25 millions. La VaR vaut 2 millions et ignore complètement l'année à 25 millions. La CVaR vaut (2 + 3 + 4 + 6 + 25) / 5 = <b>8 millions</b>.</div>
+  <p>Rockafellar et Uryasev (2000) ont montré qu'on peut plafonner la CVaR dans un programme linéaire. On peut donc chercher directement l'allocation qui maximise le profit espéré sous un plafond de perte extrême, ce que fait le moteur du <a href="lab.html">Lab</a>.</p>
+
+  <h2 id="backtest">Croire un modèle&nbsp;: le backtest hors échantillon</h2>
+  <p>Un modèle qui explique bien le passé sur lequel il a été construit ne prouve rien&nbsp;: il a pu apprendre le bruit. Le test honnête consiste à l'estimer sur une période, puis à le juger sur une autre qu'il n'a jamais vue.</p>
+  <p>Pour les producteurs texans, le modèle a été estimé sur la crise de 2015 (données fin 2014, sorties observées en 2016), puis appliqué sans retouche à la crise de 2020&nbsp;: avec les seules informations disponibles fin 2019, qui a cessé de produire en 2021&nbsp;?</p>
+  <figure><img src="assets/quintiles.png" alt="Taux de sortie réel par quintile de risque prédit : de 5,5 % à 32,8 %" loading="lazy" width="726" height="682" style="width:min(100%, 420px)"><figcaption>Taux de sortie réel en 2021 selon le quintile de risque prédit fin 2019. 638 opérateurs.</figcaption></figure>
+  <p>L'<b>AUC</b> résume la qualité du classement&nbsp;: c'est la probabilité qu'un opérateur sorti ait reçu un score de risque plus élevé qu'un opérateur resté. 0,5 correspond au hasard, 1 à un classement parfait. Ici, 0,71 hors échantillon, avec un intervalle de confiance de 0,65 à 0,78.</p>
+  <p class="muted" style="font-size:.9rem;margin-top:36px">Références&nbsp;: Schwartz (1997), <i>Journal of Finance</i>&nbsp;; Merton (1974), <i>Journal of Finance</i>&nbsp;; Rockafellar et Uryasev (2000), <i>Journal of Risk</i>.</p>
+</div></article>
+</main>
+<footer><div class="wrap">
+<span>Comptoir · Négoce physique et finance quantitative, expliqués par les chiffres · Sidy Ali Haidara, Paris, 2026</span>
+<span><a href="https://github.com/Liltop888/moteur-negoce-physique">Code source sur GitHub</a></span>
+</div></footer>
+
+</body>
+</html>
