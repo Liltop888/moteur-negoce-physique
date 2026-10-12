@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Modèles du M2 appliqués au préfinancement · Comptoir</title>
+<title>Étape 2 · Prix et risque · Comptoir</title>
 <meta name="description" content="Modèles à sauts, valeurs extrêmes, options sous Schwartz, Monte Carlo, Longstaff-Schwartz et CVA, appliqués au préfinancement de producteurs de pétrole sur données réelles.">
-<meta property="og:title" content="Modèles du M2 appliqués au préfinancement · Comptoir">
+<meta property="og:title" content="Étape 2 · Prix et risque · Comptoir">
 <meta property="og:description" content="Modèles à sauts, valeurs extrêmes, options sous Schwartz, Monte Carlo, Longstaff-Schwartz et CVA, appliqués au préfinancement de producteurs de pétrole sur données réelles.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#f8f6f1">
+<meta name="theme-color" content="#ffffff">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap">
@@ -18,26 +18,26 @@
 <body>
 <header class="top"><div class="wrap">
 <a class="brand" href="index.html">Comptoir<span>.</span></a>
-<nav class="nav" aria-label="Navigation principale"><a href="index.html">Accueil</a><a href="comprendre.html">Comprendre</a><a href="methodes.html">Méthodes</a><a href="outils.html">Outils</a><a href="lab.html">Lab</a><a href="modeles.html" aria-current="page">Modèles M2</a><a href="a-propos.html">À propos</a></nav>
+<nav class="nav" aria-label="Navigation principale"><a href="index.html">Le trade</a><a href="lab.html">1 · Qui financer</a><a href="modeles.html" aria-current="page">2 · Prix et risque</a><a href="outils.html">Simulateurs</a><a href="a-propos.html">À propos</a></nav>
 </div></header>
 <main>
 
 <article class="wrap article">
   <div class="read">
-    <span class="eyebrow">Lab · Projet n°1 · partie 2</span>
-    <h1>Le préfinancement, avec les outils du M2 Probabilités et Finance</h1>
-    <p class="lede">La première partie du projet trouve les producteurs en difficulté. Cette partie répond à la question suivante&nbsp;: une fois le producteur choisi, combien vaut vraiment l'accord&nbsp;? J'utilise quatre blocs du programme du M2 Probabilités et Finance (Sorbonne Université et École polytechnique), sur les prix réels du WTI.</p>
+    <span class="eyebrow">Étape 2 · Prix et risque</span>
+    <h1>Ce que vaut vraiment un baril préfinancé</h1>
+    <p class="lede">Une fois le producteur choisi, quatre questions décident du trade&nbsp;: quelle limite de risque fixer, combien coûte la garantie de prix qu'il demande, faut-il stocker ou vendre, et combien coûte son risque de faillite. Chaque section donne d'abord la décision, puis le calcul sur les prix réels du WTI.</p>
     <nav class="toc" aria-label="Sommaire">
-      <a href="#sauts">1. Les krachs du pétrole&nbsp;: sauts et valeurs extrêmes</a>
-      <a href="#plancher">2. Garantir un prix minimum&nbsp;: une option, valorisée deux fois</a>
-      <a href="#stockage">3. Quand vendre un baril stocké&nbsp;: arrêt optimal</a>
-      <a href="#cva">4. Le prix du risque de défaut&nbsp;: CVA</a>
-      <a href="#bilan">Bilan&nbsp;: ce qu'il reste par baril</a>
+      <a href="#sauts">1. Fixer la limite de risque&nbsp;: les krachs du pétrole</a>
+      <a href="#plancher">2. La garantie de prix&nbsp;: combien coûte le plancher</a>
+      <a href="#stockage">3. Stocker ou vendre&nbsp;: l'option de stockage</a>
+      <a href="#cva">4. Le risque de faillite&nbsp;: ce qu'il coûte par baril</a>
+      <a href="#bilan">Bilan sur 12 mois</a>
     </nav>
-    <p class="muted" style="font-size:.95rem">Hypothèses communes&nbsp;: dernier prix WTI 96,24&nbsp;$ (6 octobre 2026), modèle de Schwartz calibré dans la <a href="lab.html">partie 1</a> (κ = 0,90, niveau de long terme 65,47&nbsp;$, volatilité 52&nbsp;%), taux sans risque 4&nbsp;%, décote négociée 7,40&nbsp;$ par baril.</p>
+    <p class="muted" style="font-size:.95rem">Hypothèses communes&nbsp;: dernier prix WTI 96,24&nbsp;$ (6 octobre 2026), modèle de Schwartz calibré dans l'<a href="lab.html">étape 1</a> (κ = 0,90, niveau de long terme 65,47&nbsp;$, volatilité 52&nbsp;%), taux sans risque 4&nbsp;%, décote négociée 7,40&nbsp;$ par baril.</p>
 
-    <h2 id="sauts">1. Les krachs du pétrole&nbsp;: sauts et valeurs extrêmes</h2>
-    <p><span class="course-tag">Introduction aux modèles de saut</span><span class="course-tag">Mesures de risque en finance et extrêmes</span></p>
+    <h2 id="sauts">1. Fixer la limite de risque&nbsp;: les krachs du pétrole</h2>
+    <div class="result-box"><b>Décision&nbsp;:</b> calculer la limite de perte quotidienne avec un modèle qui suit la volatilité du jour et traite à part les chocs extrêmes (GARCH + valeurs extrêmes). C'est le seul des cinq modèles testés qui a tenu sur 2020-2026. Aujourd'hui, il donne 12,8&nbsp;% de perte possible en un jour à 1&nbsp;% de probabilité&nbsp;: le marché est agité, on couvre avant de signer.</div>
     <div class="example"><span class="eyebrow">L'exemple</span>Le 17 avril 2020, le baril de WTI vaut 18,31&nbsp;$. Le 20, il finit à −36,98&nbsp;$&nbsp;: les vendeurs paient pour s'en débarrasser. Le 21, il est à 8,91&nbsp;$. Six semaines plus tôt, le 9 mars, il avait perdu un quart de sa valeur en une séance. Avec une loi normale et la volatilité observée, de telles journées n'arriveraient pratiquement jamais.</div>
     <p>J'utilise les 4&nbsp;148 rendements journaliers du WTI de 2010 à octobre 2026 (EIA). Les rendements sont logarithmiques&nbsp;; le jour à prix négatif est retiré, car son logarithme n'existe pas (le rendement du 17 au 21 avril vaut donc −72&nbsp;%). Je compare trois façons de décrire les grosses pertes&nbsp;:</p>
     <ul>
@@ -68,8 +68,8 @@
     <figure><img src="assets/fig_var_backtest.png" alt="Rendements journaliers 2020-2026, VaR 99 % GARCH plus valeurs extrêmes, et 19 dépassements" loading="lazy" width="1460" height="780"><figcaption>VaR 99&nbsp;% du jour, calculée avec des paramètres figés sur 2010-2019. Persistance du GARCH&nbsp;: 0,992.</figcaption></figure>
     <div class="result-box"><b>Limite.</b> Les dépassements restent groupés (test d'indépendance de Christoffersen&nbsp;: p = 0,017), surtout en mars 2020 et en avril 2025&nbsp;: le modèle réagit avec un jour de retard au début d'une crise.</div>
 
-    <h2 id="plancher">2. Garantir un prix minimum&nbsp;: une option, valorisée deux fois</h2>
-    <p><span class="course-tag">Processus stochastiques et produits dérivés</span><span class="course-tag">Introduction aux processus de diffusion</span><span class="course-tag">Probabilités numériques pour la finance</span></p>
+    <h2 id="plancher">2. La garantie de prix&nbsp;: combien coûte le plancher</h2>
+    <div class="result-box"><b>Décision&nbsp;:</b> offrir un plancher sur le prix moyen à 70&nbsp;$ (1,44&nbsp;$ par baril sur un an, 0,25&nbsp;$ sur 3 mois), jamais un plancher mensuel à 80&nbsp;$ (6,32&nbsp;$, presque toute la décote).</div>
     <div class="example"><span class="eyebrow">L'exemple</span>Le producteur accepte la décote de 7,40&nbsp;$, mais il demande une garantie&nbsp;: «&nbsp;même si le baril tombe à 60&nbsp;$, vous me payez au moins 80&nbsp;$&nbsp;». Le négociant vient de lui offrir une option de vente (un put) de prix d'exercice 80&nbsp;$. Combien coûte ce cadeau&nbsp;?</div>
     <p><b>Version mensuelle&nbsp;: formule fermée.</b> Dans le modèle de Schwartz, le logarithme du prix suit un processus d'Ornstein-Uhlenbeck, donc le prix à chaque date est log-normal. Le put a une formule de type Black, mais avec une variance qui plafonne au lieu de croître sans fin&nbsp;:</p>
     <div class="eq">Var(ln S<sub>T</sub>) = σ² (1 − e<sup>−2κT</sup>) / (2κ)&nbsp;&nbsp;au lieu de&nbsp;&nbsp;σ² T</div>
@@ -88,8 +88,8 @@
     </div>
     <div class="result-box"><b>Ce que ça change pour le négociant.</b> Un plancher mensuel à 80&nbsp;$ coûte 6,32&nbsp;$, presque toute la décote de 7,40&nbsp;$. Un plancher sur la moyenne à 70&nbsp;$ ne coûte que 1,44&nbsp;$&nbsp;: c'est la garantie qu'on peut offrir. <b>Limite</b>&nbsp;: les prix sont calculés sous la mesure historique (prime de risque supposée nulle), faute de courbe des futures accessible. La prochaine étape est de calibrer sur cette courbe.</div>
 
-    <h2 id="stockage">3. Quand vendre un baril stocké&nbsp;: arrêt optimal</h2>
-    <p><span class="course-tag">Options américaines&nbsp;: théorie et méthodes numériques</span><span class="course-tag">Convexité, optimisation et contrôle stochastique</span></p>
+    <h2 id="stockage">3. Stocker ou vendre&nbsp;: l'option de stockage</h2>
+    <div class="result-box"><b>Décision&nbsp;:</b> à 96&nbsp;$, vendre les barils livrés tout de suite. Le stockage ne vaut la peine que sous 77&nbsp;$, et seulement couvert par des futures, car sa valeur dépend d'un paramètre mal mesuré.</div>
     <div class="example"><span class="eyebrow">L'exemple</span>Le négociant reçoit un baril alors que le prix vient de tomber à 50&nbsp;$. Il peut le vendre tout de suite, ou le garder en cuve (0,45&nbsp;$ par mois) en pariant que le prix remontera vers 65&nbsp;$. Chaque mois, il se repose la question. C'est le problème d'une option américaine&nbsp;: quand exercer&nbsp;?</div>
     <div class="eq">V(S<sub>0</sub>) = sup<sub>τ</sub> E[ e<sup>−rτ</sup> S<sub>τ</sub> − coûts de stockage jusqu'à τ ]</div>
     <p>Je le résous de deux façons, qui doivent donner le même résultat&nbsp;:</p>
@@ -102,33 +102,34 @@
     <p>À 50&nbsp;$, garder le baril vaut 57,44&nbsp;$&nbsp;: attendre rapporte 7,44&nbsp;$. Au prix actuel de 96&nbsp;$, la règle dit de vendre tout de suite&nbsp;: le prix est au-dessus de la frontière (77&nbsp;$ le premier mois, qui descend vers 66&nbsp;$ à l'échéance).</p>
     <div class="result-box"><b>Limite.</b> Toute la valeur d'attendre vient du retour à la moyenne, donc de κ, très mal estimé. À 50&nbsp;$, elle vaut 0,39&nbsp;$ si κ = 0,09 et 12,12&nbsp;$ si κ = 1,77, deux valeurs de son intervalle de confiance. Un négociant prudent ne stocke donc pas sans couvrir avec des futures.</div>
 
-    <h2 id="cva">4. Le prix du risque de défaut&nbsp;: CVA</h2>
-    <p><span class="course-tag">Modèles de taux et produits dérivés&nbsp;: risque de contrepartie</span><span class="course-tag">Stratégie quantitative&nbsp;: marché du crédit</span></p>
+    <h2 id="cva">4. Le risque de faillite&nbsp;: ce qu'il coûte par baril</h2>
+    <div class="result-box"><b>Décision&nbsp;:</b> compter 2,91&nbsp;$ par baril sur un prépaiement de 12 mois, 0,68&nbsp;$ sur 3 mois. Limiter la taille par producteur&nbsp;: le danger vient des défauts simultanés, pas d'un producteur isolé.</div>
     <div class="example"><span class="eyebrow">L'exemple</span>Le négociant paie d'avance 12 livraisons mensuelles (environ 960&nbsp;$ pour 12 barils). Si le producteur fait faillite au mois 5, les 8 barils restants ne viendront jamais. On récupère la moitié de la valeur des réserves mises en garantie, qui dépend du prix ce jour-là. Combien faut-il déduire de la marge pour ce risque&nbsp;?</div>
     <p>C'est la CVA (<i>credit valuation adjustment</i>)&nbsp;: la perte moyenne actualisée en cas de défaut. Je modélise le défaut avec une intensité qui dépend du prix&nbsp;:</p>
     <div class="eq">λ<sub>t</sub> = λ<sub>0</sub> · (S<sub>t</sub> / 65,47)<sup>−β</sup></div>
     <p>Avec β = 0, le défaut ignore le prix. Plus β est grand, plus le producteur fait défaut quand le prix baisse&nbsp;: c'est le <i>wrong-way risk</i>. Pour chaque β, je recale λ<sub>0</sub> pour que la probabilité de défaut à un an reste 15&nbsp;%, le seuil de risque utilisé dans la partie 1&nbsp;: seule la dépendance au prix change. Le calcul utilise un Monte Carlo conditionnel sur 200&nbsp;000 trajectoires de prix&nbsp;: on calcule la probabilité de défaut de chaque trajectoire au lieu de tirer le défaut au hasard, ce qui réduit l'erreur. Pour β = 0, le résultat coïncide avec la formule analytique (32,61&nbsp;$).</p>
     <figure><img src="assets/fig_cva.png" alt="Probabilité de défaut selon le prix final et CVA par baril selon beta" loading="lazy" width="1720" height="740"><figcaption>Gauche&nbsp;: la même probabilité moyenne de 15&nbsp;% se répartit très différemment selon β. Droite&nbsp;: CVA par baril livré.</figcaption></figure>
     <p>La CVA vaut 2,72&nbsp;$ par baril si le défaut est indépendant du prix, et 2,91&nbsp;$ avec un fort wrong-way risk&nbsp;: <b>+7&nbsp;% seulement</b>. Pourtant, avec β = 3, un producteur a 29&nbsp;% de chances de faire défaut si le prix finit bas, contre 6,5&nbsp;% s'il finit haut.</p>
-    <div class="result-box"><b>Pourquoi si peu&nbsp;?</b> Pour un seul producteur, l'essentiel de la perte est l'avance en cash, qui ne dépend pas du prix&nbsp;; seule la garantie en dépend. Le wrong-way risk devient dangereux à l'échelle du <b>portefeuille</b>&nbsp;: quand le prix chute, tous les producteurs du bassin font défaut ensemble, et la perte extrême augmente de 79&nbsp;% (<a href="lab.html">partie 1, résultat 3</a>). Le danger n'est pas un producteur, c'est la concentration.</div>
+    <div class="result-box"><b>Pourquoi si peu&nbsp;?</b> Pour un seul producteur, l'essentiel de la perte est l'avance en cash, qui ne dépend pas du prix&nbsp;; seule la garantie en dépend. Le wrong-way risk devient dangereux à l'échelle du <b>portefeuille</b>&nbsp;: quand le prix chute, tous les producteurs du bassin font défaut ensemble, et la perte extrême augmente de 79&nbsp;% (<a href="lab.html">étape 1, résultat 3</a>). Le danger n'est pas un producteur, c'est la concentration.</div>
 
-    <h2 id="bilan">Bilan&nbsp;: ce qu'il reste par baril</h2>
+    <h2 id="bilan">Bilan sur 12 mois&nbsp;: ce qu'il reste par baril</h2>
     <p>On peut maintenant chiffrer l'accord complet&nbsp;: préfinancer 12 mois de livraisons avec une décote de 7,40&nbsp;$, en offrant au producteur un plancher sur le prix moyen à 70&nbsp;$.</p>
     <div class="table-wrap"><table class="synth">
       <tr><th>Poste</th><th>Méthode</th><th class="r">$ par baril</th></tr>
       <tr><td>Décote négociée</td><td>Hypothèse de négociation</td><td class="r pos">+7,40</td></tr>
       <tr><td>Coût du risque de défaut</td><td>CVA, wrong-way risk β = 3</td><td class="r neg">−2,91</td></tr>
       <tr><td>Financement de l'avance</td><td>4&nbsp;% sur la durée de portage</td><td class="r neg">−1,71</td></tr>
-      <tr><td>Plancher offert à 70&nbsp;$ sur la moyenne</td><td>Monte Carlo, variable de contrôle</td><td class="r neg">−1,44</td></tr>
-      <tr class="total"><td>Marge restante</td><td></td><td class="r">+1,34</td></tr>
+      <tr><td>Plancher offert à 70&nbsp;$ sur la moyenne</td><td>Monte Carlo, variable de contrôle</td><td class="r neg">−1,43</td></tr>
+      <tr class="total"><td>Marge restante</td><td></td><td class="r">+1,36</td></tr>
     </table></div>
-    <p>Sur 7,40&nbsp;$ de décote, il en reste 1,34&nbsp;$. C'est l'ordre de grandeur des marges des grandes maisons de négoce, environ 1 à 2&nbsp;$ par baril. Et un plancher à 80&nbsp;$ ferait passer la marge en négatif.</p>
+    <p>Sur 7,40&nbsp;$ de décote, il en reste 1,36&nbsp;$ sur 12 mois&nbsp;; sur 3 mois, il en reste 5,89&nbsp;$. Sur 12 mois, on retombe sur la marge habituelle des grandes maisons de négoce, environ 1 à 2&nbsp;$ par baril&nbsp;: le prépaiement long ne paie pas le risque qu'il fait prendre. Et un plancher à 80&nbsp;$ ferait passer la marge en négatif.</p>
+    <p>La comparaison entre durées de prépaiement (3, 6 et 12 mois) et la taille du portefeuille sont dans <a href="index.html">la note de trading</a>.</p>
     <p class="muted" style="font-size:.9rem;margin-top:30px">Limites communes&nbsp;: un seul facteur de prix, calibré sur la mesure historique&nbsp;; décote, taux de recouvrement et β supposés, faute de données publiques sur les contrats de préfinancement. Code&nbsp;: dossier <code>src/m2/</code> du <a href="https://github.com/Liltop888/moteur-negoce-physique">dépôt GitHub</a>.<br>Références&nbsp;: Merton (1976), <i>Journal of Financial Economics</i>&nbsp;; McNeil et Frey (2000), <i>Journal of Empirical Finance</i>&nbsp;; Kupiec (1995)&nbsp;; Christoffersen (1998)&nbsp;; Schwartz (1997)&nbsp;; Kemna et Vorst (1990)&nbsp;; Longstaff et Schwartz (2001), <i>Review of Financial Studies</i>&nbsp;; Brigo, Morini et Pallavicini (2013), <i>Counterparty Credit Risk</i>.</p>
   </div>
 </article>
 </main>
 <footer><div class="wrap">
-<span>Comptoir · Négoce physique et finance quantitative, expliqués par les chiffres · Sidy Ali Haidara, Paris, 2026</span>
+<span>Comptoir · Recherche en négoce physique de pétrole · Sidy Ali Haidara, Paris, 2026</span>
 <span><a href="https://github.com/Liltop888/moteur-negoce-physique">Code source sur GitHub</a></span>
 </div></footer>
 

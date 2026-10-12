@@ -1,0 +1,55 @@
+{
+ "hyp": {
+  "S0": 96.24,
+  "decote": 7.4,
+  "plancher": 70.0,
+  "PD1": 0.15,
+  "beta": 3.0,
+  "recouvrement": 0.5,
+  "r": 0.04
+ },
+ "structures": [
+  {
+   "duree": 3,
+   "cva": 0.684447042580159,
+   "financement": 0.569612697425891,
+   "plancher": 0.2516554225561182,
+   "decote_minimale": 1.5057151625621683,
+   "marge_nette": 5.894284837437832,
+   "capital_par_bpj": 5205.975847183246,
+   "rendement_capital": 0.4132585376531964
+  },
+  {
+   "duree": 6,
+   "cva": 1.3475316488819535,
+   "financement": 0.9673325869730655,
+   "plancher": 0.6412813228365984,
+   "decote_minimale": 2.9561455586916177,
+   "marge_nette": 4.443854441308383,
+   "capital_par_bpj": 8884.5408334832,
+   "rendement_capital": 0.1825650758410268
+  },
+  {
+   "duree": 12,
+   "cva": 2.9064927219883714,
+   "financement": 1.708568049392574,
+   "plancher": 1.4271910628019466,
+   "decote_minimale": 6.042251834182892,
+   "marge_nette": 1.3577481658171084,
+   "capital_par_bpj": 15798.69341151219,
+   "rendement_capital": 0.031368295314986416
+  }
+ ],
+ "portefeuille": {
+  "producteurs": 13,
+  "bpj_par_producteur": 770,
+  "volume_bpj": 10010,
+  "pnl_annuel": 21535653.796304736,
+  "capital": 52111818.230304286,
+  "perte_moyenne_trimestre": 623796.5332572687,
+  "cvar99_trimestre": 6710410.90022125,
+  "cvar99_trimestre_independant": 5460155.05957037,
+  "p_3defauts_plus": 0.00691,
+  "p_3defauts_plus_independant": null
+ }
+}

@@ -68,7 +68,7 @@ Les résultats nominatifs par opérateur ne sont pas publiés : ce sont des pré
 
 Licence MIT.
 
-## Partie 2 : les outils du M2 Probabilités et Finance
+## Étape 2 : prix et risque du préfinancement
 
 Quatre modules qui valorisent l'accord de préfinancement sur les prix journaliers du WTI (2010-2026) :
 
@@ -78,9 +78,10 @@ Quatre modules qui valorisent l'accord de préfinancement sur les prix journalie
 | `plancher.py` | Put sous Schwartz (formule fermée), option sur moyenne par Monte Carlo + variable de contrôle | Plancher à 80 $ : 6,32 $/b ; variance divisée par 98 |
 | `stockage.py` | Arrêt optimal : Longstaff-Schwartz contre programmation dynamique | À 50 $, attendre vaut 7,44 $ ; à 96 $, vendre tout de suite |
 | `cva.py` | CVA avec intensité de défaut liée au prix (wrong-way risk) | 2,72 → 2,91 $/b |
+| `deal.py` | Comparaison des structures 3/6/12 mois et portefeuille de 13 producteurs | Coût 1,51 $/b à 3 mois contre 6,04 $/b à 12 mois ; pire trimestre de crédit 6,7 M$ |
 
 ```bash
 cd src/m2
 python run_all.py     # résultats et figures dans resultats/m2/
 ```
-Page du site : https://liltop888.github.io/moteur-negoce-physique/modeles.html
+Note de trading : https://liltop888.github.io/moteur-negoce-physique/
