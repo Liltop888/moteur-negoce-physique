@@ -1,0 +1,9 @@
+{
+  "sigma": 0.5185,
+  "kappa": 0.8995,
+  "niveau_lt": 65.47,
+  "dernier_prix": 97.31,
+  "dernier_mois": "2026-09-01",
+  "echantillon": "2015-2026",
+  "source": "FRED MCOILWTICO (EIA), moyenne mensuelle"
+}

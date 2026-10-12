@@ -1,0 +1,13 @@
+# Données brutes volumineuses (à télécharger, voir data/README.md)
+data/PDQ_DSV/
+*.dsv
+*.zip
+# Résultats nominatifs : usage privé uniquement
+resultats/operateurs.xlsx
+resultats/backtest.json
+*.xlsx
+# Divers
+__pycache__/
+.DS_Store
+*.log
+journal_moteur.txt
