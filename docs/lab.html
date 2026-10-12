@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lab · Moteur de négoce physique · Comptoir</title>
+<meta name="description" content="Projet : prédire la sortie des producteurs de pétrole texans et décider combien les préfinancer, avec un backtest sur les crises de 2015 et 2020.">
+<meta property="og:title" content="Lab · Moteur de négoce physique · Comptoir">
+<meta property="og:description" content="Projet : prédire la sortie des producteurs de pétrole texans et décider combien les préfinancer, avec un backtest sur les crises de 2015 et 2020.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0b6767">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230b6767'/%3E%3Ctext x='16' y='23' font-family='Arial' font-weight='700' font-size='19' text-anchor='middle' fill='white'%3EC%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="top"><div class="wrap">
+<a class="brand" href="index.html">Comptoir<span>.</span></a>
+<nav class="nav" aria-label="Navigation principale"><a href="index.html">Accueil</a><a href="comprendre.html">Comprendre</a><a href="methodes.html">Méthodes</a><a href="outils.html">Outils</a><a href="lab.html" aria-current="page">Lab</a><a href="a-propos.html">À propos</a></nav>
+</div></header>
+<main>
+
+<article class="wrap article">
+  <div class="read labhead">
+    <span class="eyebrow">04 · Lab · Projet n°1 · octobre 2026</span>
+    <h1>Préfinancer des producteurs de pétrole en difficulté</h1>
+    <p class="lede">Combien rapporte réellement un baril acheté à un producteur pressé, et combien faut-il lui en acheter sans risquer une perte inacceptable&nbsp;? Le projet construit la chaîne complète, des données brutes du Texas à l'allocation sous contrainte de risque.</p>
+    <div class="pills"><span class="pill">Python</span><span class="pill">Stata / Mata</span><span class="pill">Ornstein-Uhlenbeck</span><span class="pill">Merton / KMV</span><span class="pill">Logit</span><span class="pill">Monte Carlo</span><span class="pill">CVaR</span></div>
+    <div class="cta" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:6px"><a class="btn primary" href="assets/rapport_moteur_negoce.pdf">Lire le rapport (PDF, 9 pages)</a><a class="btn ghost" href="https://github.com/Lltop888/moteur-negoce-physique">Code sur GitHub</a></div>
+  </div>
+
+  <div class="read">
+  <h2>La démarche</h2>
+  <ol>
+    <li><b>Prix</b>&nbsp;: modèle de Schwartz calibré sur le WTI 2010-2026, simulé sans erreur de discrétisation.</li>
+    <li><b>Défaut lié au prix</b>&nbsp;: modèle de Merton avec le point de défaut de KMV, prix et défauts simulés ensemble.</li>
+    <li><b>Défaut observé</b>&nbsp;: logit estimé sur la production mensuelle des 12&nbsp;163 opérateurs du Texas (Railroad Commission).</li>
+    <li><b>Rendement par baril</b>&nbsp;: décote, qualité du brut, hub de revente optimal, financement, perte attendue.</li>
+    <li><b>Allocation</b>&nbsp;: programme linéaire qui maximise le profit espéré sous un plafond de CVaR et une ligne de crédit.</li>
+  </ol>
+
+  <h2>Résultat 1&nbsp;: le modèle aurait vu venir les sorties de 2021</h2>
+  <p>Estimé sur la crise de 2015, testé sans retouche sur celle de 2020&nbsp;: AUC de 0,71 (IC 95&nbsp;% bootstrap 0,65-0,78), contre 0,66 pour le seul déclin de production. En inversant le protocole, l'AUC vaut 0,70&nbsp;: le signal est stable d'une crise à l'autre.</p>
+  </div>
+  <div class="grid2">
+    <figure><img src="assets/roc.png" alt="Courbe ROC du modèle, AUC 0,71, contre 0,66 pour le déclin seul" loading="lazy" width="726" height="682"><figcaption>Courbe ROC hors échantillon (crise de 2020).</figcaption></figure>
+    <figure><img src="assets/quintiles.png" alt="Taux de sortie de 5,5 % à 32,8 % selon le quintile de risque" loading="lazy" width="726" height="682"><figcaption>Taux de sortie réel par quintile de risque prédit.</figcaption></figure>
+  </div>
+  <div class="read">
+  <p>Ce qui annonce une sortie n'est pas le déclin régulier, normal pour un puits de schiste, mais une production qui devient irrégulière et chute brutalement&nbsp;: une fois ces deux variables prises en compte, le déclin sur un an n'est plus significatif (p = 0,27).</p>
+
+  <h2>Résultat 2&nbsp;: la couverture protège contre l'erreur de modèle</h2>
+  <p>Sans couverture, le gain moyen par baril passe de +3,89&nbsp;$ à −3,36&nbsp;$ selon la valeur de κ retenue dans son intervalle de confiance. Couvert, il reste à 2,64&nbsp;$ dans tous les cas.</p>
+  <figure><img src="assets/kappa.png" alt="Gain moyen non couvert de +3,89 à −3,36 dollars selon kappa, couvert constant à 2,64 dollars" loading="lazy" width="1452" height="528"><figcaption>Gain moyen par baril selon κ, avec et sans couverture (20&nbsp;000 scénarios).</figcaption></figure>
+
+  <h2>Résultat 3&nbsp;: les défauts arrivent ensemble</h2>
+  <p>Sur un portefeuille diversifié de sept producteurs, la perte extrême augmente de 79&nbsp;% quand les défauts suivent le prix, et la probabilité de défauts en chaîne passe de 4&nbsp;% à 23&nbsp;%. Voir la fiche <a href="methodes.html#wwr">wrong-way risk</a>.</p>
+
+  <h2>Application à mai 2026</h2>
+  <p>Sur les 204 opérateurs texans produisant plus de 500 barils par jour, 13 produisent encore chaque mois mais présentent au moins 15&nbsp;% de risque de sortie sur deux ans, pour environ 45&nbsp;000 barils par jour au total. Leurs noms ne sont pas publiés&nbsp;: ce sont des prédictions statistiques, pas des constats.</p>
+
+  <h2>Limites</h2>
+  <ul>
+    <li>Une sortie peut être une faillite ou une cession de baux&nbsp;; il faut croiser avec les dépôts de bilan (Chapter 11).</li>
+    <li>Deux crises seulement pour le backtest.</li>
+    <li>La relation entre détresse et décote est une hypothèse&nbsp;: aucune donnée publique sur les prix de préfinancement.</li>
+    <li>L'irrégularité de production ne distingue pas une montée en charge d'une détresse&nbsp;: deux opérateurs en forte croissance sont des faux positifs probables.</li>
+  </ul>
+  <h2>Prochaines étapes</h2>
+  <ul>
+    <li>Rapprocher les sorties des faillites réelles de 2015-2021.</li>
+    <li>Modèle de Schwartz-Smith à deux facteurs sur la courbe des futures, par filtre de Kalman.</li>
+    <li>Valoriser un prix plancher intégré au préfinancement.</li>
+  </ul>
+  </div>
+</article>
+</main>
+<footer><div class="wrap">
+<span>Comptoir · Négoce physique et finance quantitative, expliqués par les chiffres · Sidy Ali Haidara, Paris, 2026</span>
+<span><a href="https://github.com/Lltop888/moteur-negoce-physique">Code source sur GitHub</a></span>
+</div></footer>
+
+</body>
+</html>

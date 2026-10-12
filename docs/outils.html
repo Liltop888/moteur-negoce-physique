@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Outils · Comptoir</title>
+<meta name="description" content="Calculateur de rendement net par baril et simulateur de couverture Monte Carlo pour le négoce physique de pétrole.">
+<meta property="og:title" content="Outils · Comptoir">
+<meta property="og:description" content="Calculateur de rendement net par baril et simulateur de couverture Monte Carlo pour le négoce physique de pétrole.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0b6767">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230b6767'/%3E%3Ctext x='16' y='23' font-family='Arial' font-weight='700' font-size='19' text-anchor='middle' fill='white'%3EC%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="top"><div class="wrap">
+<a class="brand" href="index.html">Comptoir<span>.</span></a>
+<nav class="nav" aria-label="Navigation principale"><a href="index.html">Accueil</a><a href="comprendre.html">Comprendre</a><a href="methodes.html">Méthodes</a><a href="outils.html" aria-current="page">Outils</a><a href="lab.html">Lab</a><a href="a-propos.html">À propos</a></nav>
+</div></header>
+<main>
+
+<div class="wrap article">
+  <div class="read">
+    <span class="eyebrow">03 · Outils</span>
+    <h1>Faites le calcul vous-même</h1>
+    <p class="lede">Deux outils issus du moteur de négoce du Lab. Les valeurs de départ sont celles du projet&nbsp;; modifiez-les pour voir ce qui fait vraiment la marge.</p>
+  </div>
+
+  <section id="rendement" style="padding-top:28px">
+    <h2>Rendement net d'un baril préfinancé</h2>
+    <p class="muted read" style="margin:10px 0 24px">Ce qu'il reste d'une décote une fois la qualité, le transport, le financement et le risque de défaut déduits.</p>
+    <div class="tool">
+      <form class="fields" id="f-rend" onsubmit="return false">
+        <div class="field"><label for="r-prix">Prix du brut <output id="o-prix"></output></label><input type="range" id="r-prix" min="30" max="140" step="1" value="97"></div>
+        <div class="field"><label for="r-decote">Décote négociée <output id="o-decote"></output></label><input type="range" id="r-decote" min="0" max="12" step="0.1" value="7.4"><small>Plus le producteur a besoin de cash, plus elle est forte.</small></div>
+        <div class="field"><label for="r-api">Densité API <output id="o-api"></output></label><input type="range" id="r-api" min="15" max="60" step="0.5" value="40"><small>WTI Midland ≈ 42, WCS ≈ 21.</small></div>
+        <div class="field"><label for="r-soufre">Soufre <output id="o-soufre"></output></label><input type="range" id="r-soufre" min="0" max="4" step="0.05" value="0.2"></div>
+        <div class="field"><label for="r-km">Distance au hub <output id="o-km"></output></label><input type="range" id="r-km" min="0" max="800" step="10" value="50"></div>
+        <div class="field"><label for="r-jours">Jours entre paiement et revente <output id="o-jours"></output></label><input type="range" id="r-jours" min="5" max="120" step="1" value="45"></div>
+        <div class="field"><label for="r-taux">Coût du financement <output id="o-taux"></output></label><input type="range" id="r-taux" min="0" max="15" step="0.5" value="8"></div>
+        <div class="field"><label for="r-pd">Probabilité de défaut annuelle <output id="o-pd"></output></label><input type="range" id="r-pd" min="0" max="80" step="1" value="33"></div>
+        <div class="field"><label for="r-lgd">Perte si défaut <output id="o-lgd"></output></label><input type="range" id="r-lgd" min="0" max="100" step="5" value="60"></div>
+        <div class="field"><label for="r-vol">Volume <output id="o-vol"></output></label><input type="range" id="r-vol" min="500" max="20000" step="500" value="2500"></div>
+      </form>
+      <div class="result" aria-live="polite">
+        <div><span class="eyebrow">Rendement net par baril</span><div class="big" id="r-net">—</div></div>
+        <div class="bars" id="r-bars"></div>
+        <div class="compare">
+          <div class="card"><dl><dt>Profit annuel</dt><dd id="r-profit">—</dd><dt>Capital immobilisé</dt><dd id="r-capital">—</dd><dt>Rendement du capital</dt><dd id="r-roc">—</dd></dl></div>
+        </div>
+        <p class="note">Ajustement de qualité&nbsp;: −0,15&nbsp;$ par degré API sous 35, −0,10&nbsp;$ par degré au-dessus de 45, −0,60&nbsp;$ par point de soufre. Transport&nbsp;: 0,80&nbsp;$ fixe + 0,008&nbsp;$ par km (×1,25 pour le détour routier). Perte attendue&nbsp;: probabilité de défaut sur la durée de portage × perte si défaut × prix. Coefficients indicatifs, à calibrer sur des écarts de prix observés.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="couverture">
+    <h2>Que change la couverture&nbsp;?</h2>
+    <p class="muted read" style="margin:10px 0 24px">Le prix est simulé avec le modèle de Schwartz calibré sur le WTI. Sans couverture, vous subissez la variation du prix pendant le portage&nbsp;; couvert par un contrat à terme, il ne reste que la marge et un risque de base.</p>
+    <div class="tool">
+      <form class="fields" id="f-couv" onsubmit="return false">
+        <div class="field"><label for="c-s0">Prix aujourd'hui <output id="o-s0"></output></label><input type="range" id="c-s0" min="30" max="140" step="1" value="97"></div>
+        <div class="field"><label for="c-lt">Niveau de long terme <output id="o-lt"></output></label><input type="range" id="c-lt" min="30" max="120" step="1" value="65"></div>
+        <div class="field"><label for="c-k">Force de rappel κ <output id="o-k"></output></label><input type="range" id="c-k" min="0.05" max="2" step="0.05" value="0.9"><small>Intervalle de confiance estimé&nbsp;: 0,09 à 1,77.</small></div>
+        <div class="field"><label for="c-sig">Volatilité annuelle <output id="o-sig"></output></label><input type="range" id="c-sig" min="0.1" max="0.8" step="0.01" value="0.52"></div>
+        <div class="field"><label for="c-j">Jours de portage <output id="o-j"></output></label><input type="range" id="c-j" min="5" max="180" step="5" value="45"></div>
+        <div class="field"><label for="c-m">Marge par baril <output id="o-m"></output></label><input type="range" id="c-m" min="0" max="8" step="0.1" value="2.6"></div>
+        <button class="run" type="button" id="c-run">Relancer 20&nbsp;000 scénarios</button>
+      </form>
+      <div class="result" aria-live="polite">
+        <canvas id="c-hist" width="900" height="420" role="img" aria-label="Distribution du résultat par baril avec et sans couverture"></canvas>
+        <div class="legend"><span><i id="lg-nc"></i>Non couvert</span><span><i id="lg-c"></i>Couvert par futures</span></div>
+        <div class="compare">
+          <div class="card"><b style="font-family:var(--ui)">Non couvert</b><dl><dt>Gain moyen</dt><dd id="c-nc-m">—</dd><dt>Probabilité de perte</dt><dd id="c-nc-p">—</dd><dt>Moyenne des 5&nbsp;% pires cas</dt><dd id="c-nc-c">—</dd></dl></div>
+          <div class="card"><b style="font-family:var(--ui)">Couvert</b><dl><dt>Gain moyen</dt><dd id="c-c-m">—</dd><dt>Probabilité de perte</dt><dd id="c-c-p">—</dd><dt>Moyenne des 5&nbsp;% pires cas</dt><dd id="c-c-c">—</dd></dl></div>
+        </div>
+        <p class="note">Faites varier κ entre 0,1 et 1,8&nbsp;: sans couverture, le gain moyen change de signe&nbsp;; couvert, il ne bouge pas. Risque de base supposé normal, d'écart-type 0,60&nbsp;$.</p>
+      </div>
+    </div>
+  </section>
+</div>
+</main>
+<footer><div class="wrap">
+<span>Comptoir · Négoce physique et finance quantitative, expliqués par les chiffres · Sidy Ali Haidara, Paris, 2026</span>
+<span><a href="https://github.com/Lltop888/moteur-negoce-physique">Code source sur GitHub</a></span>
+</div></footer>
+<script src="assets/outils.js"></script>
+</body>
+</html>
