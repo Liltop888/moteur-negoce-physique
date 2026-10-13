@@ -24,59 +24,59 @@
 
 <div class="wrap article">
   <div class="read">
-    <span class="eyebrow">03 · Outils</span>
-    <h1>Faites le calcul vous-même</h1>
-    <p class="lede">Deux outils issus du moteur de négoce du Lab. Les valeurs de départ sont celles du projet&nbsp;; modifiez-les pour voir ce qui fait vraiment la marge.</p>
+    <span class="eyebrow">Outils</span>
+    <h1>Fais le calcul toi-même</h1>
+    <p class="lede">Deux calculatrices. Bouge les curseurs et regarde ce qui change : c'est la meilleure façon de comprendre d'où vient l'argent, et d'où vient le risque.</p>
   </div>
 
   <section id="rendement" style="padding-top:28px">
-    <h2>Rendement net d'un baril préfinancé</h2>
-    <p class="muted read" style="margin:10px 0 24px">Ce qu'il reste d'une décote une fois la qualité, le transport, le financement et le risque de défaut déduits.</p>
+    <h2>Combien rapporte un baril acheté à un producteur pressé&nbsp;?</h2>
+    <p class="muted read" style="margin:10px 0 24px">Le producteur te fait une remise parce qu'il a besoin d'argent. Mais en route, la qualité du pétrole, le transport, l'argent bloqué et le risque de faillite grignotent cette remise. Combien en reste-t-il&nbsp;?</p>
     <div class="tool">
       <form class="fields" id="f-rend" onsubmit="return false">
         <div class="field"><label for="r-prix">Prix du brut <output id="o-prix"></output></label><input type="range" id="r-prix" min="30" max="140" step="1" value="97"></div>
-        <div class="field"><label for="r-decote">Décote négociée <output id="o-decote"></output></label><input type="range" id="r-decote" min="0" max="12" step="0.1" value="7.4"><small>Plus le producteur a besoin de cash, plus elle est forte.</small></div>
-        <div class="field"><label for="r-api">Densité API <output id="o-api"></output></label><input type="range" id="r-api" min="15" max="60" step="0.5" value="40"><small>WTI Midland ≈ 42, WCS ≈ 21.</small></div>
-        <div class="field"><label for="r-soufre">Soufre <output id="o-soufre"></output></label><input type="range" id="r-soufre" min="0" max="4" step="0.05" value="0.2"></div>
-        <div class="field"><label for="r-km">Distance au hub <output id="o-km"></output></label><input type="range" id="r-km" min="0" max="800" step="10" value="50"></div>
+        <div class="field"><label for="r-decote">Remise obtenue <output id="o-decote"></output></label><input type="range" id="r-decote" min="0" max="12" step="0.1" value="7.4"><small>Plus le producteur a besoin de cash, plus elle est forte.</small></div>
+        <div class="field"><label for="r-api">Légèreté du pétrole (degré API) <output id="o-api"></output></label><input type="range" id="r-api" min="15" max="60" step="0.5" value="40"><small>Plus le chiffre est haut, plus le pétrole est léger et vaut cher. Texas ≈ 42, pétrole lourd du Canada ≈ 21.</small></div>
+        <div class="field"><label for="r-soufre">Soufre <output id="o-soufre"></output></label><input type="range" id="r-soufre" min="0" max="4" step="0.05" value="0.2"><small>Plus il y a de soufre, plus il faut le nettoyer, et moins le pétrole vaut.</small></div>
+        <div class="field"><label for="r-km">Distance jusqu'au point de vente <output id="o-km"></output></label><input type="range" id="r-km" min="0" max="800" step="10" value="50"></div>
         <div class="field"><label for="r-jours">Jours entre paiement et revente <output id="o-jours"></output></label><input type="range" id="r-jours" min="5" max="120" step="1" value="45"></div>
-        <div class="field"><label for="r-taux">Coût du financement <output id="o-taux"></output></label><input type="range" id="r-taux" min="0" max="15" step="0.5" value="8"></div>
-        <div class="field"><label for="r-pd">Probabilité de défaut annuelle <output id="o-pd"></output></label><input type="range" id="r-pd" min="0" max="80" step="1" value="33"></div>
-        <div class="field"><label for="r-lgd">Perte si défaut <output id="o-lgd"></output></label><input type="range" id="r-lgd" min="0" max="100" step="5" value="60"></div>
-        <div class="field"><label for="r-vol">Volume <output id="o-vol"></output></label><input type="range" id="r-vol" min="500" max="20000" step="500" value="2500"></div>
+        <div class="field"><label for="r-taux">Taux d'intérêt de ton argent <output id="o-taux"></output></label><input type="range" id="r-taux" min="0" max="15" step="0.5" value="8"></div>
+        <div class="field"><label for="r-pd">Risque de faillite du producteur, par an <output id="o-pd"></output></label><input type="range" id="r-pd" min="0" max="80" step="1" value="33"></div>
+        <div class="field"><label for="r-lgd">Part perdue s'il fait faillite <output id="o-lgd"></output></label><input type="range" id="r-lgd" min="0" max="100" step="5" value="60"></div>
+        <div class="field"><label for="r-vol">Barils achetés par jour <output id="o-vol"></output></label><input type="range" id="r-vol" min="500" max="20000" step="500" value="2500"></div>
       </form>
       <div class="result" aria-live="polite">
-        <div><span class="eyebrow">Rendement net par baril</span><div class="big" id="r-net">—</div></div>
+        <div><span class="eyebrow">Ce qu'il te reste par baril</span><div class="big" id="r-net">—</div></div>
         <div class="bars" id="r-bars"></div>
         <div class="compare">
-          <div class="card"><dl><dt>Profit annuel</dt><dd id="r-profit">—</dd><dt>Capital immobilisé</dt><dd id="r-capital">—</dd><dt>Rendement du capital</dt><dd id="r-roc">—</dd></dl></div>
+          <div class="card"><dl><dt>Profit sur un an</dt><dd id="r-profit">—</dd><dt>Argent bloqué</dt><dd id="r-capital">—</dd><dt>Ce que rapporte ton argent, par an</dt><dd id="r-roc">—</dd></dl></div>
         </div>
-        <p class="note">Ajustement de qualité&nbsp;: −0,15&nbsp;$ par degré API sous 35, −0,10&nbsp;$ par degré au-dessus de 45, −0,60&nbsp;$ par point de soufre. Transport&nbsp;: 0,80&nbsp;$ fixe + 0,008&nbsp;$ par km (×1,25 pour le détour routier). Perte attendue&nbsp;: probabilité de défaut sur la durée de portage × perte si défaut × prix. Coefficients indicatifs, à calibrer sur des écarts de prix observés.</p>
+        <details class="plus"><summary>Pour aller plus loin : les formules utilisées</summary><div class="plus-body"><p>Ajustement de qualité&nbsp;: −0,15&nbsp;$ par degré API sous 35, −0,10&nbsp;$ par degré au-dessus de 45, −0,60&nbsp;$ par point de soufre. Transport&nbsp;: 0,80&nbsp;$ fixe + 0,008&nbsp;$ par km (×1,25 pour le détour routier). Perte attendue&nbsp;: probabilité de défaut sur la durée de portage × perte si défaut × prix. Coefficients indicatifs, à calibrer sur des écarts de prix observés.</p></div></details>
       </div>
     </div>
   </section>
 
   <section id="couverture">
-    <h2>Que change la couverture&nbsp;?</h2>
-    <p class="muted read" style="margin:10px 0 24px">Le prix est simulé avec le modèle de Schwartz calibré sur le WTI. Sans couverture, vous subissez la variation du prix pendant le portage&nbsp;; couvert par un contrat à terme, il ne reste que la marge et un risque de base.</p>
+    <h2>Pourquoi se protéger contre la baisse du prix&nbsp;?</h2>
+    <p class="muted read" style="margin:10px 0 24px">Tu achètes du pétrole aujourd\'hui et tu le revends dans 45 jours. Si le prix chute entre les deux, ta marge disparaît. Ici, on simule 20&nbsp;000 avenirs possibles du prix, avec et sans protection.</p>
     <div class="tool">
       <form class="fields" id="f-couv" onsubmit="return false">
         <div class="field"><label for="c-s0">Prix aujourd'hui <output id="o-s0"></output></label><input type="range" id="c-s0" min="30" max="140" step="1" value="97"></div>
-        <div class="field"><label for="c-lt">Niveau de long terme <output id="o-lt"></output></label><input type="range" id="c-lt" min="30" max="120" step="1" value="65"></div>
-        <div class="field"><label for="c-k">Force de rappel κ <output id="o-k"></output></label><input type="range" id="c-k" min="0.05" max="2" step="0.05" value="0.9"><small>Intervalle de confiance estimé&nbsp;: 0,09 à 1,77.</small></div>
-        <div class="field"><label for="c-sig">Volatilité annuelle <output id="o-sig"></output></label><input type="range" id="c-sig" min="0.1" max="0.8" step="0.01" value="0.52"></div>
-        <div class="field"><label for="c-j">Jours de portage <output id="o-j"></output></label><input type="range" id="c-j" min="5" max="180" step="5" value="45"></div>
-        <div class="field"><label for="c-m">Marge par baril <output id="o-m"></output></label><input type="range" id="c-m" min="0" max="8" step="0.1" value="2.6"></div>
+        <div class="field"><label for="c-lt">Prix «&nbsp;normal&nbsp;» vers lequel il revient <output id="o-lt"></output></label><input type="range" id="c-lt" min="30" max="120" step="1" value="65"></div>
+        <div class="field"><label for="c-k">Vitesse de retour vers ce prix <output id="o-k"></output></label><input type="range" id="c-k" min="0.05" max="2" step="0.05" value="0.9"><small>On la connaît mal&nbsp;: quelque part entre 0,09 et 1,77.</small></div>
+        <div class="field"><label for="c-sig">Agitation du marché <output id="o-sig"></output></label><input type="range" id="c-sig" min="0.1" max="0.8" step="0.01" value="0.52"></div>
+        <div class="field"><label for="c-j">Jours entre l'achat et la revente <output id="o-j"></output></label><input type="range" id="c-j" min="5" max="180" step="5" value="45"></div>
+        <div class="field"><label for="c-m">Ta marge par baril <output id="o-m"></output></label><input type="range" id="c-m" min="0" max="8" step="0.1" value="2.6"></div>
         <button class="run" type="button" id="c-run">Relancer 20&nbsp;000 scénarios</button>
       </form>
       <div class="result" aria-live="polite">
         <canvas id="c-hist" width="900" height="420" role="img" aria-label="Distribution du résultat par baril avec et sans couverture"></canvas>
-        <div class="legend"><span><i id="lg-nc"></i>Non couvert</span><span><i id="lg-c"></i>Couvert par futures</span></div>
+        <div class="legend"><span><i id="lg-nc"></i>Sans protection</span><span><i id="lg-c"></i>Protégé (prix fixé d'avance)</span></div>
         <div class="compare">
-          <div class="card"><b style="font-family:var(--ui)">Non couvert</b><dl><dt>Gain moyen</dt><dd id="c-nc-m">—</dd><dt>Probabilité de perte</dt><dd id="c-nc-p">—</dd><dt>Moyenne des 5&nbsp;% pires cas</dt><dd id="c-nc-c">—</dd></dl></div>
-          <div class="card"><b style="font-family:var(--ui)">Couvert</b><dl><dt>Gain moyen</dt><dd id="c-c-m">—</dd><dt>Probabilité de perte</dt><dd id="c-c-p">—</dd><dt>Moyenne des 5&nbsp;% pires cas</dt><dd id="c-c-c">—</dd></dl></div>
+          <div class="card"><b style="font-family:var(--ui)">Sans protection</b><dl><dt>Gain moyen</dt><dd id="c-nc-m">—</dd><dt>Probabilité de perte</dt><dd id="c-nc-p">—</dd><dt>Moyenne des pires cas</dt><dd id="c-nc-c">—</dd></dl></div>
+          <div class="card"><b style="font-family:var(--ui)">Protégé</b><dl><dt>Gain moyen</dt><dd id="c-c-m">—</dd><dt>Probabilité de perte</dt><dd id="c-c-p">—</dd><dt>Moyenne des pires cas</dt><dd id="c-c-c">—</dd></dl></div>
         </div>
-        <p class="note">Faites varier κ entre 0,1 et 1,8&nbsp;: sans couverture, le gain moyen change de signe&nbsp;; couvert, il ne bouge pas. Risque de base supposé normal, d'écart-type 0,60&nbsp;$.</p>
+        <p class="note">Bouge la vitesse de retour&nbsp;: sans protection, ton gain peut devenir une perte&nbsp;; protégé, il ne bouge presque pas. Se protéger, c'est vendre dès aujourd'hui, à un prix fixé, le pétrole qu'on revendra plus tard.</p>
       </div>
     </div>
   </section>

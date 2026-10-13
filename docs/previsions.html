@@ -62,13 +62,22 @@
   </section>
 
   <section class="read">
-    <h2>Comment c'est calculé</h2>
+    <h2>Comment ça marche</h2>
+    <p><b>On ne parie pas sur la hausse ou la baisse.</b> Personne ne sait dans quel sens ira le prix. Le modèle répond à une autre question&nbsp;: de combien peut-il bouger&nbsp;?</p>
+    <p><b>Comme la météo.</b> Après un orage, le temps reste agité plusieurs jours, puis se calme. Le pétrole fait pareil&nbsp;: après un choc, il bouge fort pendant quelques semaines. Le modèle le sait&nbsp;: en période agitée, ses fourchettes s'élargissent&nbsp;; quand tout est calme, elles se resserrent.</p>
+    <p><b>En rejouant le passé.</b> Le modèle reprend les vrais mouvements du pétrole depuis dix ans, krachs compris, et imagine 4&nbsp;000 avenirs possibles pour la semaine à venir. La fourchette garde les 90&nbsp;% d'avenirs du milieu.</p>
+    <p><b>Un bon modèle se trompe une fois sur dix.</b> Une fourchette qui ne se trompe jamais serait trop large pour servir à quelque chose. Le bon score est donc autour de 90&nbsp;%. Chaque prévision est enregistrée le jour même, dans un <a href="data/journal.csv">registre</a> qu'on ne peut pas modifier après coup.</p>
+    <details class="plus"><summary>Pour aller plus loin : le modèle GARCH et la simulation historique filtrée</summary>
+    <div class="plus-body">
+
     <p><b>On ne parie pas sur la direction.</b> La fourchette est centrée sur le prix d'aujourd'hui&nbsp;: le modèle ne prétend pas savoir si le prix va monter. Il estime seulement de combien il peut bouger.</p>
     <p><b>La volatilité change avec le temps.</b> Après un choc, le prix reste agité plusieurs semaines. Un modèle GARCH(1,1) estime chaque jour cette agitation à partir des derniers rendements. Les fourchettes s'élargissent donc en période de crise et se resserrent quand le marché est calme.</p>
     <p><b>Les chocs gardent leur vraie forme.</b> Au lieu de supposer une loi normale, qui sous-estime les krachs, on réutilise les chocs réellement observés depuis dix ans, une fois retirée la volatilité du moment. On simule 4&nbsp;000 trajectoires futures, et la fourchette à 90&nbsp;% laisse 5&nbsp;% des scénarios de chaque côté.</p>
     <div class="eq">σ²<sub>t+1</sub> = ω + α ε²<sub>t</sub> + β σ²<sub>t</sub>,&nbsp;&nbsp;&nbsp;ε<sub>t</sub> = σ<sub>t</sub> z<sub>t</sub>,&nbsp;&nbsp;z<sub>t</sub> tirés parmi les chocs observés</div>
     <p><b>Un bon modèle se trompe 1 fois sur 10.</b> Une fourchette à 90&nbsp;% qui contient le prix 100&nbsp;% du temps est trop large, donc inutile. Si elle ne le contient que 70&nbsp;% du temps, elle sous-estime le risque. Le score affiché doit rester proche de 90&nbsp;%. La comparaison avec une loi normale à volatilité fixe est dans les données publiées.</p>
     <p><b>Tout est daté.</b> Chaque prévision publiée est ajoutée au <a href="data/journal.csv">registre</a> le jour même et n'est jamais modifiée. L'historique complet est visible sur <a href="https://github.com/SidyHaidara/moteur-negoce-physique/commits/main/docs/data/journal.csv">GitHub</a>.</p>
+    
+    </div></details>
     <p class="muted" style="font-size:.9rem">Sources&nbsp;: U.S. Energy Information Administration (prix spot du brut et des carburants au port de New York), Commission européenne (Bulletin pétrolier hebdomadaire&nbsp;: prix moyens à la pompe dans l'Union européenne, taxes comprises). Les prix à la pompe sont hebdomadaires et bougent moins que le brut, car les taxes y pèsent lourd&nbsp;: leurs fourchettes sont plus étroites.</p>
   </section>
 </div>

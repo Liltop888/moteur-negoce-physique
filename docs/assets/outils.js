@@ -23,8 +23,8 @@
     const perte = (x.pd / 100) * (x.jours / 365) * (x.lgd / 100) * x.prix;
     const net = x.decote + qualite - transport - financement - perte;
     const items = [
-      ["Décote", x.decote], ["Qualité du brut", qualite], ["Transport", -transport],
-      ["Financement", -financement], ["Perte attendue (défaut)", -perte],
+      ["Remise obtenue", x.decote], ["Qualité du pétrole", qualite], ["Transport", -transport],
+      ["Argent bloqué", -financement], ["Risque de faillite", -perte],
     ];
     const max = Math.max(...items.map((i) => Math.abs(i[1])), 0.01);
     $("r-bars").innerHTML = items.map(([l, v]) =>
